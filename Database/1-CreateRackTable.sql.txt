@@ -1,0 +1,5 @@
+CREATE DATABASE StorageFacility;
+
+USE StorageFacility;
+
+CREATE TABLE Rack(`Name` VARCHAR(64) PRIMARY KEY);
