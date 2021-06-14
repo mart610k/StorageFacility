@@ -17,5 +17,7 @@ namespace StorageFacility.Classes
 
         IFileAccess GetFileAccess();
 
+        IShelfService GetShelfService(IDatabaseConnection databaseConnection);
+
     }
 }
