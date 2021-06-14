@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace StorageFacility.Logic
 {
-    public interface IRackLogic
+    public interface IShelfLogic
     {
-        void RegisterRack(string rackname);
-        List<string> GetRacks();
+        void RegisterShelf(string name, string rackName);
     }
 }

@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace StorageFacility.Classes
 {
-    public interface IRackService
+    public interface IShelfService
     {
-        bool Register(string name);
-        List<string> GetRacks();
+        bool Register(string name, string rackName);
     }
 }

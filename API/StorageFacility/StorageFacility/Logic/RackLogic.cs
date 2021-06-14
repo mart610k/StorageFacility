@@ -11,6 +11,21 @@ namespace StorageFacility.Logic
     {
         IObjectFactory objectFactory = new ObjectFactory();
 
+        public List<string> GetRacks()
+        {
+            IAuthService authService = objectFactory.GetAuthService();
+            IFileAccess fileAccess = objectFactory.GetFileAccess();
+            string configFilePath = fileAccess.GetCurrentWorkingDirectory() + "\\config.txt";
+            IDatabaseConnection databaseConnection = objectFactory.GetDatabaseConnectionFromFile(configFilePath);
+            IRackService rackService = objectFactory.GetRackService(databaseConnection);
+
+            if (authService.UserAllowed(""))
+            {
+                return rackService.GetRacks();
+            }
+            return null;
+        }
+
         public void RegisterRack(string rackname)
         {
             IAuthService authService = objectFactory.GetAuthService();

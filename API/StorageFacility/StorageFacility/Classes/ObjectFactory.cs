@@ -48,5 +48,10 @@ namespace StorageFacility.Classes
         {
             return new RackService(databaseConnection);
         }
+
+        public IShelfService GetShelfService(IDatabaseConnection databaseConnection)
+        {
+            return new ShelfService(databaseConnection);
+        }
     }
 }
