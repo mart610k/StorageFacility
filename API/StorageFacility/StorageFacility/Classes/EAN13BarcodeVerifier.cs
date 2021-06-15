@@ -15,8 +15,6 @@ namespace StorageFacility.Classes
             {
                 throw new FormatException("Barcode format was not valid!");
             }
-            // Verification method https://boxshot.com/barcode/barcodes/ean-13/check-digit-calculator/
-
             int checksum = int.Parse(barcode[12].ToString());
             int checkDigit = CalculateCheckDigit(barcode);
             if (checksum == checkDigit)
@@ -36,15 +34,16 @@ namespace StorageFacility.Classes
         /// <returns>the check digit number for barcode</returns>
         int CalculateCheckDigit(string barcode)
         {
+            // Verification method https://boxshot.com/barcode/barcodes/ean-13/check-digit-calculator/
             char[] characters = barcode.ToCharArray();
 
             int evenNumbersSum = 0;
             int unevenNumbersSum = 0;
-
+            //Skips over index 12 as thats the check digit.
             for (int i = 0; i < 12; i++)
             {
                 int number = int.Parse(characters[i].ToString());
-                //Uneven are located on index 0,2,4,6
+                //Uneven are located on index 0,2,4,6 and so on
                 if (i % 2 == 0)
                 {
                     unevenNumbersSum += number;
@@ -55,11 +54,13 @@ namespace StorageFacility.Classes
                 }
 
             }
+            //As of the standard the numbers at even posistion will be multiplied by 3
             int fullSum = evenNumbersSum * 3 + unevenNumbersSum;
 
             int reminder = fullSum % 10;
 
             int checkDigit = reminder;
+            //If the reminder is not 0 then substract the number from 10
             if (reminder != 0)
             {
                 checkDigit = 10 - reminder;
