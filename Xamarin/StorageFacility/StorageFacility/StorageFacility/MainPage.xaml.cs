@@ -30,5 +30,10 @@ namespace StorageFacility
                 await DisplayAlert("New Rack", "New rack have not been created", "OK");
             }
         }
+
+        private async void Show_Register_Product(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RegisterProduct());
+        }
     }
 }
