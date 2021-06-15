@@ -17,11 +17,11 @@ namespace StorageFacility.Controllers
 
 
         [HttpPost]
-        public IActionResult RegisterProduct(string barcode, string productName)
+        public IActionResult RegisterProduct(string barcode, string name)
         {
             try
             {
-                productLogic.RegisterProduct("", barcode, productName);
+                productLogic.RegisterProduct("", barcode, name);
                 return Ok();
             }
             catch
