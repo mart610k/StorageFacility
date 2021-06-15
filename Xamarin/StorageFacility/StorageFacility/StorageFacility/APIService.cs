@@ -56,7 +56,7 @@ namespace StorageFacility
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 List<string> Racks = new List<string>();
-                
+                Racks.Add(response.Content.ReadAsStringAsync().Result);
                 return Racks ;
             }
             else
