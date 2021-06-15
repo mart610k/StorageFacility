@@ -11,11 +11,15 @@ namespace StorageFacility.Classes
 
         IRackService GetRackService(IDatabaseConnection databaseConnection);
 
+        IProductService GetProductService(IDatabaseConnection databaseConnection);
+
         IDatabaseConnection GetDatabaseConnection(string host, int port, string databaseName, string username, string password);
 
         IDatabaseConnection GetDatabaseConnectionFromFile(string filePath);
 
         IFileAccess GetFileAccess();
+
+        IBarcodeVerifier GetEAN13BarcodeVerifier();
 
     }
 }

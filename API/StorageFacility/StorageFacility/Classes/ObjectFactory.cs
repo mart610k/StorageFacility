@@ -39,9 +39,19 @@ namespace StorageFacility.Classes
                    );
         }
 
+        public IBarcodeVerifier GetEAN13BarcodeVerifier()
+        {
+            return new EAN13BarcodeVerifier();
+        }
+
         public IFileAccess GetFileAccess()
         {
             return new FileAccess();
+        }
+
+        public IProductService GetProductService(IDatabaseConnection databaseConnection)
+        {
+            return new ProductService(databaseConnection);
         }
 
         public IRackService GetRackService(IDatabaseConnection databaseConnection)

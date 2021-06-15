@@ -11,7 +11,8 @@ namespace StorageFacility.Classes
         public bool Verify(string barcode)
         {
             //EAN 13 bar codes are a set of 13 numbers where the 13th number is a check digit
-            if (!Regex.IsMatch(barcode, "[0-9]{13}"))
+            //"^" means start of the string and "$" means end of the string
+            if (!Regex.IsMatch(barcode, "^[0-9]{13}$"))
             {
                 throw new FormatException("Barcode format was not valid!");
             }
