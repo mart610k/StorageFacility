@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using StorageFacility.Classes;
 using StorageFacility.Exceptions;
+using StorageFacility.Service;
 
 namespace StorageFacility.Logic
 {

@@ -1,0 +1,3 @@
+USE StorageFacility;
+
+CREATE TABLE Product(`Barcode` BIGINT PRIMARY KEY,`Name` VARCHAR(64));
