@@ -10,37 +10,21 @@ namespace StorageFacility.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RackController : ControllerBase
+    public class ShelfController : ControllerBase
     {
-        IRackLogic rackLogic = new RackLogic();
+        IShelfLogic shelfLogic = new ShelfLogic();
         [HttpPost]
-        public IActionResult RegisterRack(string name)
+        public IActionResult RegisterShelf(string name, string rackName)
         {
             try
             {
-                rackLogic.RegisterRack(name);
+                shelfLogic.RegisterShelf(name, rackName);
                 return Ok();
-            }
-            catch(Exception e)
-            {
-                return StatusCode(StatusCodes.Status400BadRequest, e.Message);
-            }
-
-        }
-
-        [HttpGet]
-        public IActionResult GetRacks()
-        {
-            try
-            {
-                
-                return Ok(rackLogic.GetRacks());
             }
             catch (Exception e)
             {
                 return StatusCode(StatusCodes.Status400BadRequest, e.Message);
             }
         }
-
     }
 }

@@ -21,6 +21,8 @@ namespace StorageFacility.Classes
         IFileAccess GetFileAccess();
 
         IBarcodeVerifier GetEAN13BarcodeVerifier();
+      
+        IShelfService GetShelfService(IDatabaseConnection databaseConnection);
 
     }
 }
