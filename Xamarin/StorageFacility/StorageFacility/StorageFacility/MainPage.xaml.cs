@@ -10,6 +10,7 @@ namespace StorageFacility
 {
     public partial class MainPage : ContentPage
     {
+        // API service initation
         APIService apiService = new APIService();
 
         public MainPage()
@@ -17,6 +18,12 @@ namespace StorageFacility
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Upon button click, shows Create popup.
+        /// Creates Rack based on popup input
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Create_New_Rack(object sender, EventArgs e)
         {
             string result = await DisplayPromptAsync("New Rack", "Enter Rack Name:");
@@ -31,6 +38,12 @@ namespace StorageFacility
             }
         }
 
+        /// <summary>
+        /// Upon button click, makes the shelf popup visible
+        /// Sets the rackPicker item source
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Shelf_Visible(object sender, EventArgs e)
         {
             newShelfPopup.IsVisible = true;
@@ -38,6 +51,13 @@ namespace StorageFacility
             rackPicker.SelectedIndex = 0;
         }
 
+        /// <summary>
+        /// Upon button click, creates a shelf based on inputs
+        /// Displays whether created or not afterwards
+        /// Turns off Shelf Visibility
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void CreateShelf(object sender, EventArgs e)
         {
             bool resultBool = await apiService.CreateShelf(shelfName.Text, rackPicker.SelectedItem.ToString());
@@ -56,6 +76,11 @@ namespace StorageFacility
             shelfName.Text = "";
         }
 
+        /// <summary>
+        /// Upon button click, Redirects to a new content page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void Show_Register_Product(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new RegisterProduct());
