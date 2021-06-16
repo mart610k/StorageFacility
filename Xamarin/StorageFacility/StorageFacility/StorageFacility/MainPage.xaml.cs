@@ -15,7 +15,7 @@ namespace StorageFacility
         public MainPage()
         {
             InitializeComponent();
-x        }
+        }
 
         private async void Create_New_Rack(object sender, EventArgs e)
         {

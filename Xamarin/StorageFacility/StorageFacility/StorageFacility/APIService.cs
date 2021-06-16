@@ -50,7 +50,7 @@ namespace StorageFacility
         public async Task<List<string>> GetRacks()
         {
             HttpResponseMessage response = await client.GetAsync(
-                string.Format("{0}/api/Rack}", HostName));
+                string.Format("{0}/api/Rack", HostName));
             response.EnsureSuccessStatusCode();
 
             if (response.StatusCode == HttpStatusCode.OK)
