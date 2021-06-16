@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Http.Headers;
+using Newtonsoft.Json.Linq;
 
 namespace StorageFacility
 {
@@ -55,9 +56,8 @@ namespace StorageFacility
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-                List<string> Racks = new List<string>();
-                Racks.Add(response.Content.ReadAsStringAsync().Result);
-                return Racks ;
+                List<string> racks = JArray.Parse(response.Content.ReadAsStringAsync().Result).ToObject<List<string>>();
+                return racks;
             }
             else
             {
