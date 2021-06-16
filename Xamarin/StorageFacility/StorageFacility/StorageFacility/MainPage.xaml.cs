@@ -34,7 +34,7 @@ namespace StorageFacility
         private async void Shelf_Visible(object sender, EventArgs e)
         {
             newShelfPopup.IsVisible = true;
-            rackPicker.ItemsSource = /*new List<string>() { "Test1", "test2", "test3" };*/ await apiService.GetRacks();
+            rackPicker.ItemsSource = await apiService.GetRacks();
             rackPicker.SelectedIndex = 0;
         }
 
@@ -52,7 +52,6 @@ namespace StorageFacility
             }
 
             newShelfPopup.IsVisible = false;
-            //await DisplayAlert("Create Shelf", string.Format("Shelf {0} have been created, on Rack {1}", shelfName.Text, rackPicker.SelectedItem), "Close");
             rackPicker.ItemsSource = null;
             shelfName.Text = "";
         }
