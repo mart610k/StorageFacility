@@ -31,6 +31,31 @@ namespace StorageFacility
             }
         }
 
+        private async void Shelf_Visible(object sender, EventArgs e)
+        {
+            newShelfPopup.IsVisible = true;
+            rackPicker.ItemsSource = await apiService.GetRacks();
+            rackPicker.SelectedIndex = 0;
+        }
+
+        private async void CreateShelf(object sender, EventArgs e)
+        {
+            bool resultBool = await apiService.CreateShelf(shelfName.Text, rackPicker.SelectedItem.ToString());
+
+            if (resultBool)
+            {
+                await DisplayAlert("New Shelf", string.Format("Shelf {0} have been created, on Rack {1}", shelfName.Text, rackPicker.SelectedItem), "OK");
+            }
+            else
+            {
+                await DisplayAlert("New Shelf", "New Shelf have not been created", "OK");
+            }
+
+            newShelfPopup.IsVisible = false;
+            rackPicker.ItemsSource = null;
+            shelfName.Text = "";
+        }
+
         private async void Show_Register_Product(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new RegisterProduct());
