@@ -5,6 +5,7 @@
 
     <StackLayout>
         <Button Clicked="Create_New_Rack" Text="Create New Rack" BackgroundColor="BurlyWood"></Button>
+        <Button Clicked="Show_Register_Product" Text="Create New Product" BackgroundColor="BurlyWood"></Button>
     </StackLayout>
 
 </ContentPage>
