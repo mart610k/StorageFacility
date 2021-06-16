@@ -1,0 +1,1 @@
+host=HOST,port=PORT,databaseName=DATABASENAME,username=USERNAME,password=PASSWORD

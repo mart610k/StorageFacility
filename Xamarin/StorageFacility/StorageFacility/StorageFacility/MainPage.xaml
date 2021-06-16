@@ -13,6 +13,7 @@
                 <Button Clicked="CreateShelf" BackgroundColor="Coral" Text="Create Shelf"></Button>
             </StackLayout>
         </ContentView>
+        <Button Clicked="Show_Register_Product" Text="Create New Product" BackgroundColor="BurlyWood"></Button>
     </StackLayout>
 
 </ContentPage>

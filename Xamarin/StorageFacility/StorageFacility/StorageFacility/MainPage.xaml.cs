@@ -55,5 +55,10 @@ namespace StorageFacility
             rackPicker.ItemsSource = null;
             shelfName.Text = "";
         }
+
+        private async void Show_Register_Product(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RegisterProduct());
+        }
     }
 }

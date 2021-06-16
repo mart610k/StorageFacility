@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StorageFacility.RegisterProduct">
+    <ContentPage.Content>
+        <StackLayout>
+            
+            <Label HorizontalOptions="CenterAndExpand" Text="Type in barcode"></Label>
+
+            <Entry Placeholder="Product Barcode" x:Name="BarcodeEntry"  />
+            <Label HorizontalOptions="CenterAndExpand" Text="Type in the product name"></Label>
+
+            <Entry Placeholder="Product Name" x:Name="NameEntry" />
+
+            <Button Clicked="Validate_Input_And_Send" Text="Add new Product"></Button>
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>
