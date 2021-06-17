@@ -56,8 +56,8 @@ namespace StorageFacility.Controllers
         {
             try
             {
-                shelfLogic.GetShelves();
-                return Ok();
+                
+                return Ok(shelfLogic.GetShelves());
             }
             catch (Exception e)
             {

@@ -76,13 +76,13 @@ namespace StorageFacility.Logic
 
         }
 
-        public void GetProducts()
+        public List<Product> GetProducts()
         {
             if (authService.UserAllowed(""))
             {
                return productService.GetProducts();
             }
-            return;
+            return null;
         }
     }
 }

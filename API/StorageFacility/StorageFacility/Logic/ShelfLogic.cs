@@ -75,7 +75,7 @@ namespace StorageFacility.Logic
             }
         }
 
-        public void GetShelves()
+        public List<Shelf> GetShelves()
         {
             IAuthService authService = objectFactory.GetAuthService();
             IFileAccess fileAccess = objectFactory.GetFileAccess();
@@ -85,8 +85,9 @@ namespace StorageFacility.Logic
 
             if (authService.UserAllowed(""))
             {
-                shelfService.GetShelves();
+                return shelfService.GetShelves();
             }
+            return null;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace StorageFacility.Service
     public class ShelfService : IShelfService
     {
         private IDatabaseConnection databaseConnection;
-        List<string> shelves = new List<string>();
+        
 
         public ShelfService(IDatabaseConnection databaseConnection)
         {
@@ -147,8 +147,10 @@ namespace StorageFacility.Service
             return true;
         }
 
-        public List<string> GetShelves()
+        public List<Shelf> GetShelves()
         {
+            List<Shelf> shelves = new List<Shelf>();
+
             MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
 
             MySqlCommand comm = conn.CreateCommand();
@@ -159,9 +161,10 @@ namespace StorageFacility.Service
             {
                 conn.Open();
                 MySqlDataReader reader = comm.ExecuteReader();
+                
                 while (reader.Read())
                 {
-
+                    shelves.Add(new Shelf(reader.GetString("Name"), reader.GetString("Rack_Name")));
                 }
             }
             catch
@@ -176,7 +179,7 @@ namespace StorageFacility.Service
                 }
             }
 
-            return null;
+            return shelves;
         }
     }
 }

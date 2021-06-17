@@ -16,8 +16,9 @@ namespace StorageFacility.Service
             this.databaseConnection = databaseConnection;
         }
 
-        public bool GetProducts()
+        public List<Product> GetProducts()
         {
+            List<Product> products = new List<Product>();
             MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
 
             MySqlCommand comm = conn.CreateCommand();
@@ -27,7 +28,11 @@ namespace StorageFacility.Service
             try
             {
                 conn.Open();
-                comm.ExecuteNonQuery();
+                MySqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                    products.Add(new Product(reader.GetUInt64("Barcode"), reader.GetString("Name")));
+                }
             }
             catch
             {
@@ -41,7 +46,7 @@ namespace StorageFacility.Service
                 }
             }
 
-            return true;
+            return products;
         }
 
         public bool Register(ulong barcode, string name)
