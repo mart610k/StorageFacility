@@ -16,6 +16,34 @@ namespace StorageFacility.Service
             this.databaseConnection = databaseConnection;
         }
 
+        public bool GetProducts()
+        {
+            MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
+
+            MySqlCommand comm = conn.CreateCommand();
+
+            comm.CommandText = "Select Name, Barcode from Product";
+
+            try
+            {
+                conn.Open();
+                comm.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return true;
+        }
+
         public bool Register(ulong barcode, string name)
         {
             MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());

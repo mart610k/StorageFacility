@@ -8,5 +8,6 @@ namespace StorageFacility.Service
     public interface IProductService
     {
         bool Register(ulong barcode, string name);
+        List<string> GetProducts();
     }
 }
