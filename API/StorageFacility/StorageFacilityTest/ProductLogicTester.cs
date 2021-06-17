@@ -7,6 +7,7 @@ using Autofac.Extras.Moq;
 using StorageFacility.Classes;
 using Moq;
 using StorageFacility.Exceptions;
+using StorageFacility.Service;
 
 namespace StorageFacilityTest
 {
