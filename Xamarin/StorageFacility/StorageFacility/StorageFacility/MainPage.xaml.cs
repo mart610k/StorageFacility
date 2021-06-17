@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StorageFacility.Service;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace StorageFacility
 {
     public partial class MainPage : ContentPage
     {
-        // API service initation
-        APIService apiService = new APIService();
+        IRackService rackService = new RackService();
+        IShelfService shelfService = new ShelfService();
 
         public MainPage()
         {
@@ -27,7 +28,7 @@ namespace StorageFacility
         private async void Create_New_Rack(object sender, EventArgs e)
         {
             string result = await DisplayPromptAsync("New Rack", "Enter Rack Name:");
-            bool resultbool = await apiService.CreateRack(result);
+            bool resultbool = await rackService.CreateRack(result);
             if (resultbool)
             {
                 await DisplayAlert("New Rack", "New rack have been created", "OK");
@@ -47,7 +48,7 @@ namespace StorageFacility
         private async void Shelf_Visible(object sender, EventArgs e)
         {
             newShelfPopup.IsVisible = true;
-            rackPicker.ItemsSource = await apiService.GetRacks();
+            rackPicker.ItemsSource = await rackService.GetRacks();
             rackPicker.SelectedIndex = 0;
         }
 
@@ -60,7 +61,7 @@ namespace StorageFacility
         /// <param name="e"></param>
         private async void CreateShelf(object sender, EventArgs e)
         {
-            bool resultBool = await apiService.CreateShelf(shelfName.Text, rackPicker.SelectedItem.ToString());
+            bool resultBool = await shelfService.CreateShelf(shelfName.Text, rackPicker.SelectedItem.ToString());
 
             if (resultBool)
             {

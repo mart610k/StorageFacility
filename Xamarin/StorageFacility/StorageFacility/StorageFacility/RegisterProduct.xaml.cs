@@ -14,7 +14,7 @@ namespace StorageFacility
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class RegisterProduct : ContentPage
     {
-        ProductService productService = new ProductService();
+        IProductService productService = new ProductService();
 
         public RegisterProduct()
         {
