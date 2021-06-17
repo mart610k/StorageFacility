@@ -13,9 +13,16 @@ namespace StorageFacility.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
+        // Initiating the Product Logic
         IProductLogic productLogic = new ProductLogic();
 
-
+        /// <summary>
+        /// Registers a product through HTTPPost
+        /// using Product Logic Method
+        /// </summary>
+        /// <param name="barcode"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult RegisterProduct(string barcode, string name)
         {

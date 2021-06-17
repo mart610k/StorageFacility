@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace StorageFacility.Logic
 {
+    /// <summary>
+    /// Interface to Product Logic
+    /// </summary>
     public interface IProductLogic
     {
         void RegisterProduct(string username, string barcode, string name);

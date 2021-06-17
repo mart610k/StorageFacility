@@ -12,7 +12,16 @@ namespace StorageFacility.Controllers
     [ApiController]
     public class ShelfController : ControllerBase
     {
+        // Initiating Shelf Logic
         IShelfLogic shelfLogic = new ShelfLogic();
+
+        /// <summary>
+        /// Register Shelf through HTTPPost
+        /// with Shelf Logic Method
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="rackName"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult RegisterShelf(string name, string rackName)
         {

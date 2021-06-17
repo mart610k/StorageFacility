@@ -9,8 +9,15 @@ namespace StorageFacility.Logic
 {
     public class RackLogic : IRackLogic
     {
+        // Initiating the Factory
         IObjectFactory objectFactory = new ObjectFactory();
 
+        /// <summary>
+        /// Gets all Racks
+        /// Uses Factory to get the necesarry Services
+        /// Uses RackService to get all Racks
+        /// </summary>
+        /// <returns></returns>
         public List<string> GetRacks()
         {
             IAuthService authService = objectFactory.GetAuthService();
@@ -26,6 +33,12 @@ namespace StorageFacility.Logic
             return null;
         }
 
+        /// <summary>
+        /// Registers a Rack, based on the input
+        /// Uses Factory to get the necesarry services 
+        /// Uses RackService to register the Rack
+        /// </summary>
+        /// <param name="rackname"></param>
         public void RegisterRack(string rackname)
         {
             IAuthService authService = objectFactory.GetAuthService();

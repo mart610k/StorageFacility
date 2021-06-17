@@ -12,7 +12,14 @@ namespace StorageFacility.Controllers
     [ApiController]
     public class RackController : ControllerBase
     {
+        // Initialize Rack Logic
         IRackLogic rackLogic = new RackLogic();
+        /// <summary>
+        /// Register a new Rack, through HTTPPost
+        /// with RackLogic method
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult RegisterRack(string name)
         {
@@ -28,12 +35,16 @@ namespace StorageFacility.Controllers
 
         }
 
+        /// <summary>
+        /// Get all Racks, through a HTTPGet
+        /// with RackLogic Method
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetRacks()
         {
             try
             {
-                
                 return Ok(rackLogic.GetRacks());
             }
             catch (Exception e)

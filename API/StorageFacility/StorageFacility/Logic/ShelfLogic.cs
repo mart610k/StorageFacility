@@ -9,7 +9,16 @@ namespace StorageFacility.Logic
 {
     public class ShelfLogic : IShelfLogic
     {
+        // Initializing Factory
         IObjectFactory objectFactory = new ObjectFactory();
+
+        /// <summary>
+        /// Registers a shelf, based on the inputs
+        /// Uses Factory to get the necesarry services 
+        /// Uses ShelfService to register the Shelf
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="rackName"></param>
         public void RegisterShelf(string name, string rackName)
         {
             IAuthService authService = objectFactory.GetAuthService();

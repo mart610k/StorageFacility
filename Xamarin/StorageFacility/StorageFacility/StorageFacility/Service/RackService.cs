@@ -11,10 +11,17 @@ namespace StorageFacility.Service
 {
     class RackService : IRackService
     {
-
+        // HTTP Client
+        // HostName String
         static HttpClient client = new HttpClient();
         static string HostName = "https://test.baage-it.dk";
 
+        /// <summary>
+        /// Sends a post to the API, to create a Rack. Based around the parameter
+        /// Chekcs whether the HTTPStatusCode is OK
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public async Task<bool> CreateRack(string name)
         {
             HttpResponseMessage response = await client.PostAsync(
@@ -32,6 +39,11 @@ namespace StorageFacility.Service
 
         }
 
+        /// <summary>
+        /// Sends a Get to the API, to get all the rakcs from the API
+        /// Returns a list based on the API return
+        /// </summary>
+        /// <returns></returns>
         public async Task<List<string>> GetRacks()
         {
             HttpResponseMessage response = await client.GetAsync(
