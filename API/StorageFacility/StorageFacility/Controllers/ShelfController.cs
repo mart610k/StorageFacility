@@ -35,5 +35,7 @@ namespace StorageFacility.Controllers
                 return StatusCode(StatusCodes.Status400BadRequest, e.Message);
             }
         }
+
+        //[HttpGet("find/product")]
     }
 }

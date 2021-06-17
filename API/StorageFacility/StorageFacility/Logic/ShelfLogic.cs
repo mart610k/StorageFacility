@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using StorageFacility.Service;
+using StorageFacility.DTO;
 
 namespace StorageFacility.Logic
 {
@@ -11,6 +12,11 @@ namespace StorageFacility.Logic
     {
         // Initializing Factory
         IObjectFactory objectFactory = new ObjectFactory();
+
+        public List<ShelfProductAmount> GetShelvesContainingProductByID(string productID)
+        {
+            throw new NotImplementedException();
+        }
 
         /// <summary>
         /// Registers a shelf, based on the inputs
