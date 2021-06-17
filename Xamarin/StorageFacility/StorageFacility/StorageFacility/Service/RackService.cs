@@ -7,9 +7,9 @@ using System.Net;
 using System.Net.Http.Headers;
 using Newtonsoft.Json.Linq;
 
-namespace StorageFacility
+namespace StorageFacility.Service
 {
-    class APIService
+    class RackService : IRackService
     {
 
         static HttpClient client = new HttpClient();
@@ -30,22 +30,6 @@ namespace StorageFacility
                 return false;
             }
 
-        }
-
-        public async Task<bool> CreateShelf(string name, string rackName)
-        {
-            HttpResponseMessage response = await client.PostAsync(
-                string.Format("{0}/api/Shelf?name={1}&rackName={2}", HostName, name, rackName), null);
-            response.EnsureSuccessStatusCode();
-
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 
         public async Task<List<string>> GetRacks()

@@ -3,8 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using StorageFacility.Classes;
 
-namespace StorageFacility.Classes
+namespace StorageFacility.Service
 {
     public class ShelfService : IShelfService
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StorageFacility.Classes
+namespace StorageFacility.Service
 {
     public interface IAuthService
     {
