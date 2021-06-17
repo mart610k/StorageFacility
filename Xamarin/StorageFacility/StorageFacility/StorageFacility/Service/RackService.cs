@@ -32,8 +32,6 @@ namespace StorageFacility.Service
 
         }
 
-       
-
         public async Task<List<string>> GetRacks()
         {
             HttpResponseMessage response = await client.GetAsync(
