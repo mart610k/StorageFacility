@@ -1,11 +1,19 @@
-﻿namespace StorageFacility.DTO
+﻿using System;
+using System.Text.RegularExpressions;
+
+namespace StorageFacility.DTO
 {
     public class Product
     {
 
         public Product(string barcode, string productName)
         {
-            Barcode = barcode;
+            if (!Regex.IsMatch(barcode, "^[0-9]{13}$"))
+            {
+                throw new FormatException("Barcode format was not valid!");
+            }
+
+            Barcode = ulong.Parse(barcode);
             Name = productName;
         }
 

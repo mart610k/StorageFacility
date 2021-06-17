@@ -1,20 +1,58 @@
 ﻿using StorageFacility.Classes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using StorageFacility.Service;
 using StorageFacility.DTO;
+using StorageFacility.Exceptions;
 
 namespace StorageFacility.Logic
 {
     public class ShelfLogic : IShelfLogic
     {
-        // Initializing Factory
-        IObjectFactory objectFactory = new ObjectFactory();
+        IAuthService authService;
+        IFileAccess fileAccess;
+        IShelfService shelfService;
+        IBarcodeVerifier barcodeVerifier;
 
-        public List<ShelfProductAmount> GetShelvesContainingProductByID(string productID)
+        public ShelfLogic()
         {
+            IObjectFactory objectFactory = new ObjectFactory();
+            authService = objectFactory.GetAuthService();
+            fileAccess = objectFactory.GetFileAccess();
+            string configFilePath = fileAccess.GetCurrentWorkingDirectory() + "\\config.txt";
+            IDatabaseConnection databaseConnection = objectFactory.GetDatabaseConnectionFromFile(configFilePath);
+            shelfService = objectFactory.GetShelfService(databaseConnection);
+            barcodeVerifier = objectFactory.GetEAN13BarcodeVerifier();
+
+        }
+        
+
+        public ShelfLogic(IBarcodeVerifier barcodeVerifier,IFileAccess fileAccess,IShelfService shelfService, IAuthService authService)
+        {
+            this.barcodeVerifier = barcodeVerifier;
+            this.authService = authService;
+            this.fileAccess = fileAccess;
+            this.shelfService = shelfService;
+        }
+
+        public List<ShelfProductAmount> GetShelvesContainingProductByID(string username,string productID)
+        {
+            try
+            {
+                if (!authService.UserAllowed(username))
+                {
+                    throw new UserNotAuthorizedException("User is not allowed");
+                }
+
+                barcodeVerifier.Verify(productID);
+
+                return shelfService.GetShelvesContainingProductByID(productID);
+
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
             throw new NotImplementedException();
         }
 
@@ -27,12 +65,6 @@ namespace StorageFacility.Logic
         /// <param name="rackName"></param>
         public void RegisterShelf(string name, string rackName)
         {
-            IAuthService authService = objectFactory.GetAuthService();
-            IFileAccess fileAccess = objectFactory.GetFileAccess();
-            string configFilePath = fileAccess.GetCurrentWorkingDirectory() + "\\config.txt";
-            IDatabaseConnection databaseConnection = objectFactory.GetDatabaseConnectionFromFile(configFilePath);
-            IShelfService shelfService = objectFactory.GetShelfService(databaseConnection);
-
             if (authService.UserAllowed(""))
             {
                 shelfService.Register(name, rackName);

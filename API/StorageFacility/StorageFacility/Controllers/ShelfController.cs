@@ -36,6 +36,19 @@ namespace StorageFacility.Controllers
             }
         }
 
-        //[HttpGet("find/product")]
+        [HttpGet("find/product")]
+        public IActionResult GetProductFromShelves(string productID)
+        {
+            try
+            {
+                return Ok(shelfLogic.GetShelvesContainingProductByID("",productID));
+
+            }
+            catch (Exception e)
+            {
+
+                return StatusCode(StatusCodes.Status400BadRequest, e.Message);
+            }
+        }
     }
 }

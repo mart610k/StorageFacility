@@ -18,6 +18,6 @@ namespace StorageFacility.Logic
         /// </summary>
         /// <param name="productID">the product ID</param>
         /// <returns>the shelves and the products on the different Racks</returns>
-        List<ShelfProductAmount> GetShelvesContainingProductByID(string productID);
+        List<ShelfProductAmount> GetShelvesContainingProductByID(string username,string productID);
     }
 }
