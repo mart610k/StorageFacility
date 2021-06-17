@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace StorageFacility.Service
 {
-    class ShelfService
+    class ShelfService : IShelfService
     {
         static HttpClient client = new HttpClient();
         static string HostName = "https://test.baage-it.dk";

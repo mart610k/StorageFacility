@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace StorageFacility.Service
 {
-    class ProductService
+    class ProductService : IProductService
     {
         static HttpClient client = new HttpClient();
         static string HostName = "https://test.baage-it.dk";
@@ -18,7 +18,7 @@ namespace StorageFacility.Service
                     name,
                     barcode);
 
-            
+
             HttpResponseMessage response = await client.PostAsync(
                  link
                 , null);

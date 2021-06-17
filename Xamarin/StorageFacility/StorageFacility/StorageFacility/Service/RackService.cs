@@ -9,7 +9,7 @@ using Newtonsoft.Json.Linq;
 
 namespace StorageFacility.Service
 {
-    class RackService
+    class RackService : IRackService
     {
 
         static HttpClient client = new HttpClient();

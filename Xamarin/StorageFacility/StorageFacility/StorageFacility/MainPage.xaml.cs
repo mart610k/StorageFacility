@@ -11,8 +11,8 @@ namespace StorageFacility
 {
     public partial class MainPage : ContentPage
     {
-        RackService rackService = new RackService();
-        ShelfService shelfService = new ShelfService();
+        IRackService rackService = new RackService();
+        IShelfService shelfService = new ShelfService();
 
         public MainPage()
         {
