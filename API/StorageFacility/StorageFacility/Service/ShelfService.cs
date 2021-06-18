@@ -11,7 +11,6 @@ namespace StorageFacility.Service
     public class ShelfService : IShelfService
     {
         private IDatabaseConnection databaseConnection;
-        
 
         public ShelfService(IDatabaseConnection databaseConnection)
         {
@@ -21,13 +20,11 @@ namespace StorageFacility.Service
         public List<ShelfProductAmount> GetShelvesContainingProductByID(string productID)
         {
             List<ShelfProductAmount> shelfProductAmounts = new List<ShelfProductAmount>();
-            
-             MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
+
+            MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
 
             MySqlCommand comm = conn.CreateCommand();
             comm.CommandText = "Select `Rack_Name`,`Shelf_Name`,`Product_BC`,`Amount`,`Name` from Shelf_Product_Amount Join Product on Shelf_Product_Amount.Product_BC = Product.Barcode WHERE Product_BC = @Barcode;";
-
-            
 
             try
             {
@@ -42,13 +39,11 @@ namespace StorageFacility.Service
                     Shelf shelf = new Shelf(reader.GetString("Shelf_Name"), reader.GetString("Rack_Name"));
                     Product product = new Product(reader.GetUInt64("Product_BC").ToString(), reader.GetString("Name"));
 
-
                     ShelfProductAmount shelfProductAmount = new ShelfProductAmount(shelf, product, reader.GetByte("Amount"));
-
 
                     shelfProductAmounts.Add(shelfProductAmount);
                 }
-             }
+            }
             catch
             {
                 throw;
@@ -60,16 +55,16 @@ namespace StorageFacility.Service
                     conn.Close();
                 }
             }
-          return shelfProductAmounts;
+            return shelfProductAmounts;
         }
-        
-        
+
+
         public bool AddProductToShelf(string rackName, string shelfName, string barcode)
         {
             MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
 
             MySqlCommand comm = conn.CreateCommand();
-            
+
             comm.CommandText = "INSERT INTO Shelf_Product_Amount(`Rack_Name`, `Shelf_Name`, `Product_BC`, `Amount`) Value (@rackName, @shelfName, @productBC, @amount);";
 
             comm.Parameters.AddWithValue("@rackName", rackName);
@@ -94,7 +89,7 @@ namespace StorageFacility.Service
                 }
             }
             return true;
-         }
+        }
 
         public bool Register(string name, string rackName)
         {
@@ -207,7 +202,7 @@ namespace StorageFacility.Service
             {
                 conn.Open();
                 MySqlDataReader reader = comm.ExecuteReader();
-                
+
                 while (reader.Read())
                 {
                     shelves.Add(new Shelf(reader.GetString("Name"), reader.GetString("Rack_Name")));

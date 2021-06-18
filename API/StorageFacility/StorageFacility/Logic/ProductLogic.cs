@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using StorageFacility.Classes;
 using StorageFacility.Exceptions;
 using StorageFacility.Service;
+using StorageFacility.DTO;
 
 namespace StorageFacility.Logic
 {

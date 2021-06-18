@@ -41,16 +41,14 @@ namespace StorageFacility.Controllers
         {
             try
             {
-                return Ok(shelfLogic.GetShelvesContainingProductByID("",productID));
-
+                return Ok(shelfLogic.GetShelvesContainingProductByID("", productID));
             }
             catch (Exception e)
             {
-
                 return StatusCode(StatusCodes.Status400BadRequest, e.Message);
             }
         }
-        
+
         [HttpPost("AddToShelf")]
         public IActionResult AddProductToShelf(string rackName, string shelfName, string barcode)
         {
@@ -58,20 +56,18 @@ namespace StorageFacility.Controllers
             {
                 shelfLogic.AddProductToShelf(rackName, shelfName, barcode);
                 return Ok();
-                }
+            }
             catch (Exception e)
             {
-
                 return StatusCode(StatusCodes.Status400BadRequest, e.Message);
             }
         }
-            
+
         [HttpGet]
         public IActionResult GetShelves()
         {
             try
             {
-                
                 return Ok(shelfLogic.GetShelves());
             }
             catch (Exception e)

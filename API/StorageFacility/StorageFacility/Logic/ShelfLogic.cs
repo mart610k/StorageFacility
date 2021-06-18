@@ -23,7 +23,6 @@ namespace StorageFacility.Logic
             IDatabaseConnection databaseConnection = objectFactory.GetDatabaseConnectionFromFile(configFilePath);
             shelfService = objectFactory.GetShelfService(databaseConnection);
             barcodeVerifier = objectFactory.GetEAN13BarcodeVerifier();
-
         }
         
 
@@ -73,12 +72,6 @@ namespace StorageFacility.Logic
 
         public void AddProductToShelf(string rackName, string shelfName, string barcode)
         {
-            IAuthService authService = objectFactory.GetAuthService();
-            IFileAccess fileAccess = objectFactory.GetFileAccess();
-            string configFilePath = fileAccess.GetCurrentWorkingDirectory() + "\\config.txt";
-            IDatabaseConnection databaseConnection = objectFactory.GetDatabaseConnectionFromFile(configFilePath);
-            IShelfService shelfService = objectFactory.GetShelfService(databaseConnection);
-
             if (authService.UserAllowed(""))
             {
                 shelfService.AddProductToShelf(rackName, shelfName, barcode);
@@ -87,12 +80,6 @@ namespace StorageFacility.Logic
 
         public void AddProductAmount(string rackName, string shelfName, string barcode, int amount)
         {
-            IAuthService authService = objectFactory.GetAuthService();
-            IFileAccess fileAccess = objectFactory.GetFileAccess();
-            string configFilePath = fileAccess.GetCurrentWorkingDirectory() + "\\config.txt";
-            IDatabaseConnection databaseConnection = objectFactory.GetDatabaseConnectionFromFile(configFilePath);
-            IShelfService shelfService = objectFactory.GetShelfService(databaseConnection);
-
             if (authService.UserAllowed(""))
             {
                 shelfService.AddProductAmount(rackName, shelfName, barcode, amount);
@@ -101,12 +88,6 @@ namespace StorageFacility.Logic
 
         public void RemoveProductAmount(string rackName, string shelfName, string barcode, int amount)
         {
-            IAuthService authService = objectFactory.GetAuthService();
-            IFileAccess fileAccess = objectFactory.GetFileAccess();
-            string configFilePath = fileAccess.GetCurrentWorkingDirectory() + "\\config.txt";
-            IDatabaseConnection databaseConnection = objectFactory.GetDatabaseConnectionFromFile(configFilePath);
-            IShelfService shelfService = objectFactory.GetShelfService(databaseConnection);
-
             if (authService.UserAllowed(""))
             {
                 shelfService.RemoveProductAmount(rackName, shelfName, barcode, amount);
@@ -115,12 +96,6 @@ namespace StorageFacility.Logic
 
         public List<Shelf> GetShelves()
         {
-            IAuthService authService = objectFactory.GetAuthService();
-            IFileAccess fileAccess = objectFactory.GetFileAccess();
-            string configFilePath = fileAccess.GetCurrentWorkingDirectory() + "\\config.txt";
-            IDatabaseConnection databaseConnection = objectFactory.GetDatabaseConnectionFromFile(configFilePath);
-            IShelfService shelfService = objectFactory.GetShelfService(databaseConnection);
-
             if (authService.UserAllowed(""))
             {
                 return shelfService.GetShelves();

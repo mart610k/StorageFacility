@@ -43,21 +43,6 @@ namespace StorageFacility
             {
                 ProductsFound.Add(test[i]);
             }
-            
-            Console.WriteLine(ProductsFound.Count);
-
-            for (int i = 0; i < ProductsFound.Count; i++)
-            {
-                Console.WriteLine(ProductsFound[i].Amount);
-
-                Console.WriteLine(ProductsFound[i].Product.Name);
-
-                Console.WriteLine(ProductsFound[i].Shelf.Name);
-
-            }
-
         }
-
-       
     }
 }

@@ -13,14 +13,6 @@ namespace StorageFacilityTest
 {
     class ShelfLogicTester
     {
-        //[TestCase("1234567891248a")]
-        //[TestCase("123451248")]
-        //[TestCase("123456789124834")]
-        //[TestCase("abdcrestdnito")]
-        //public void TestBarcodeFails
-
-
-
         [Test]
         public void GetShelvesContainingProductByID_UserIsNotAllowed()
         {
