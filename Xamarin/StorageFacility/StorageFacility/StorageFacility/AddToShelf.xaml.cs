@@ -91,6 +91,7 @@ namespace StorageFacility
             }
             shelfPicker.ItemsSource = shelfNames;
             shelfPicker.SelectedIndex = 0;
+            
         }
 
         /// <summary>
@@ -110,5 +111,15 @@ namespace StorageFacility
             ProductPicker.SelectedIndex = 0;
         }
 
+        private void shelfPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < shelfNames.Count; i++)
+            {
+                if (shelfNames[i] == shelfPicker.SelectedItem.ToString())
+                {
+                    RackLabel.Text = rackNames[i];
+                }
+            }
+        }
     }
 }
