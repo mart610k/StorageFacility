@@ -37,6 +37,18 @@ namespace StorageFacility.Controllers
             }
         }
 
+        [HttpGet]
+        public IActionResult GetProducts()
+        {
+            try
+            {
+                return Ok(productLogic.GetProducts());
+            }
+            catch (Exception e)
+            {
 
+                return StatusCode(StatusCodes.Status400BadRequest, e.Message);
+            }
+        }
     }
 }

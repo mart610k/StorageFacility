@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="StorageFacility.AddToShelf">
+    <ContentPage.Content>
+        <StackLayout>
+            <Picker x:Name="shelfPicker" SelectedIndexChanged="shelfPicker_SelectedIndexChanged"></Picker>
+            <Label x:Name="RackLabel"></Label>
+            <Picker x:Name="ProductPicker"></Picker>
+            <Button Clicked="AddProductToShelf" Text="Add To Shelf" BackgroundColor="LightSalmon"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

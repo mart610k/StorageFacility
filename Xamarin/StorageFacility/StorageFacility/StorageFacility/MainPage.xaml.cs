@@ -86,5 +86,10 @@ namespace StorageFacility
         {
             await Navigation.PushAsync(new RegisterProduct());
         }
+
+        private async void Show_AddToShelf(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddToShelf());
+        }
     }
 }

@@ -1,0 +1,8 @@
+USE StorageFacility;
+
+CREATE TABLE Shelf_Product_Amount(`Rack_Name` VARCHAR(64), `Shelf_Name` VARCHAR(32), `Product_BC` BIGINT, `Amount` TINYINT, 
+FOREIGN KEY (`Rack_Name`) REFERENCES Shelf(`Rack_Name`), 
+FOREIGN KEY (`Shelf_Name`) REFERENCES Shelf(`Name`),
+FOREIGN KEY (`Product_BC`) REFERENCES Product(`Barcode`),
+CONSTRAINT PK_Product_Amount PRIMARY KEY(`Rack_Name`, `Shelf_Name`, `Product_BC`)
+);
