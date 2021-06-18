@@ -69,7 +69,63 @@ namespace StorageFacility.Logic
             {
                 shelfService.Register(name, rackName);
             }
+        }
 
+        public void AddProductToShelf(string rackName, string shelfName, string barcode)
+        {
+            IAuthService authService = objectFactory.GetAuthService();
+            IFileAccess fileAccess = objectFactory.GetFileAccess();
+            string configFilePath = fileAccess.GetCurrentWorkingDirectory() + "\\config.txt";
+            IDatabaseConnection databaseConnection = objectFactory.GetDatabaseConnectionFromFile(configFilePath);
+            IShelfService shelfService = objectFactory.GetShelfService(databaseConnection);
+
+            if (authService.UserAllowed(""))
+            {
+                shelfService.AddProductToShelf(rackName, shelfName, barcode);
+            }
+        }
+
+        public void AddProductAmount(string rackName, string shelfName, string barcode, int amount)
+        {
+            IAuthService authService = objectFactory.GetAuthService();
+            IFileAccess fileAccess = objectFactory.GetFileAccess();
+            string configFilePath = fileAccess.GetCurrentWorkingDirectory() + "\\config.txt";
+            IDatabaseConnection databaseConnection = objectFactory.GetDatabaseConnectionFromFile(configFilePath);
+            IShelfService shelfService = objectFactory.GetShelfService(databaseConnection);
+
+            if (authService.UserAllowed(""))
+            {
+                shelfService.AddProductAmount(rackName, shelfName, barcode, amount);
+            }
+        }
+
+        public void RemoveProductAmount(string rackName, string shelfName, string barcode, int amount)
+        {
+            IAuthService authService = objectFactory.GetAuthService();
+            IFileAccess fileAccess = objectFactory.GetFileAccess();
+            string configFilePath = fileAccess.GetCurrentWorkingDirectory() + "\\config.txt";
+            IDatabaseConnection databaseConnection = objectFactory.GetDatabaseConnectionFromFile(configFilePath);
+            IShelfService shelfService = objectFactory.GetShelfService(databaseConnection);
+
+            if (authService.UserAllowed(""))
+            {
+                shelfService.RemoveProductAmount(rackName, shelfName, barcode, amount);
+            }
+        }
+
+        public List<Shelf> GetShelves()
+        {
+            IAuthService authService = objectFactory.GetAuthService();
+            IFileAccess fileAccess = objectFactory.GetFileAccess();
+            string configFilePath = fileAccess.GetCurrentWorkingDirectory() + "\\config.txt";
+            IDatabaseConnection databaseConnection = objectFactory.GetDatabaseConnectionFromFile(configFilePath);
+            IShelfService shelfService = objectFactory.GetShelfService(databaseConnection);
+
+            if (authService.UserAllowed(""))
+            {
+                return shelfService.GetShelves();
+            }
+            return null;
         }
     }
 }

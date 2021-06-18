@@ -8,5 +8,12 @@
     <PackageReference Include="MySql.Data" Version="8.0.25" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logic\Interface\" />
+    <Folder Include="Logic\Class\" />
+    <Folder Include="Service\Class\" />
+    <Folder Include="Service\Interface\" />
+  </ItemGroup>
+
 
 </Project>

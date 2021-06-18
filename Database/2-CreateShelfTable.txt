@@ -1,3 +1,5 @@
 USE StorageFacility;
 
-CREATE TABLE Shelf(`Name` VARCHAR(32), `Rack_Name` VARCHAR(64), FOREIGN KEY (`Rack_Name`) REFERENCES Rack(`Name`), CONSTRAINT PK_Shelf PRIMARY KEY(`Name`, `Rack_Name`));
+CREATE TABLE Shelf(`Name` VARCHAR(32), `Rack_Name` VARCHAR(64), 
+FOREIGN KEY (`Rack_Name`) REFERENCES Rack(`Name`), 
+CONSTRAINT PK_Shelf PRIMARY KEY(`Name`, `Rack_Name`));

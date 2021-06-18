@@ -21,11 +21,10 @@ namespace StorageFacility.Service
         public List<ShelfProductAmount> GetShelvesContainingProductByID(string productID)
         {
             List<ShelfProductAmount> shelfProductAmounts = new List<ShelfProductAmount>();
-
-            MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
+            
+             MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
 
             MySqlCommand comm = conn.CreateCommand();
-
             comm.CommandText = "Select `Rack_Name`,`Shelf_Name`,`Product_BC`,`Amount`,`Name` from Shelf_Product_Amount Join Product on Shelf_Product_Amount.Product_BC = Product.Barcode WHERE Product_BC = @Barcode;";
 
             
@@ -49,8 +48,39 @@ namespace StorageFacility.Service
 
                     shelfProductAmounts.Add(shelfProductAmount);
                 }
+             }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+          return shelfProductAmounts;
+        }
+        
+        
+        public bool AddProductToShelf(string rackName, string shelfName, string barcode)
+        {
+            MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
 
+            MySqlCommand comm = conn.CreateCommand();
+            
+            comm.CommandText = "INSERT INTO Shelf_Product_Amount(`Rack_Name`, `Shelf_Name`, `Product_BC`, `Amount`) Value (@rackName, @shelfName, @productBC, @amount);";
 
+            comm.Parameters.AddWithValue("@rackName", rackName);
+            comm.Parameters.AddWithValue("@shelfName", shelfName);
+            comm.Parameters.AddWithValue("@productBC", barcode);
+            comm.Parameters.AddWithValue("@amount", 0);
+
+            try
+            {
+                conn.Open();
+                comm.ExecuteNonQuery();
             }
             catch
             {
@@ -63,8 +93,8 @@ namespace StorageFacility.Service
                     conn.Close();
                 }
             }
-            return shelfProductAmounts;
-        }
+            return true;
+         }
 
         public bool Register(string name, string rackName)
         {
@@ -95,6 +125,107 @@ namespace StorageFacility.Service
             }
 
             return true;
+        }
+
+        public bool RemoveProductAmount(string rackName, string shelfName, string barcode, int amount)
+        {
+            MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
+
+            MySqlCommand comm = conn.CreateCommand();
+
+            comm.CommandText = "UPDATE SET Shelf_Product_Amount(`Amount`= `Amount` - @amount) WHERE (`Rack_Name`, `Shelf_Name`, `Product_BC`) Value (@rackName, @shelfName, @productBC);";
+
+            comm.Parameters.AddWithValue("@rackName", rackName);
+            comm.Parameters.AddWithValue("@shelfName", shelfName);
+            comm.Parameters.AddWithValue("@productBC", barcode);
+            comm.Parameters.AddWithValue("@amount", amount);
+
+            try
+            {
+                conn.Open();
+                comm.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return true;
+        }
+        public bool AddProductAmount(string rackName, string shelfName, string barcode, int amount)
+        {
+            MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
+
+            MySqlCommand comm = conn.CreateCommand();
+
+            comm.CommandText = "UPDATE SET Shelf_Product_Amount(`Amount`= `Amount` + @amount) WHERE (`Rack_Name`, `Shelf_Name`, `Product_BC`) Value (@rackName, @shelfName, @productBC);";
+
+            comm.Parameters.AddWithValue("@rackName", rackName);
+            comm.Parameters.AddWithValue("@shelfName", shelfName);
+            comm.Parameters.AddWithValue("@productBC", barcode);
+            comm.Parameters.AddWithValue("@amount", amount);
+
+            try
+            {
+                conn.Open();
+                comm.ExecuteNonQuery();
+            }
+            catch
+            {
+                throw;
+            }
+
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return true;
+        }
+
+        public List<Shelf> GetShelves()
+        {
+            List<Shelf> shelves = new List<Shelf>();
+
+            MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
+
+            MySqlCommand comm = conn.CreateCommand();
+
+            comm.CommandText = "Select Name, Rack_Name from Shelf";
+
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader = comm.ExecuteReader();
+                
+                while (reader.Read())
+                {
+                    shelves.Add(new Shelf(reader.GetString("Name"), reader.GetString("Rack_Name")));
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+
+            return shelves;
         }
     }
 }

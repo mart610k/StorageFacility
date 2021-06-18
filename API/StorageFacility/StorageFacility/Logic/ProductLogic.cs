@@ -75,5 +75,14 @@ namespace StorageFacility.Logic
             }
 
         }
+
+        public List<Product> GetProducts()
+        {
+            if (authService.UserAllowed(""))
+            {
+               return productService.GetProducts();
+            }
+            return null;
+        }
     }
 }
