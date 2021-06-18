@@ -117,7 +117,7 @@ namespace StorageFacility
             {
                 if (shelfNames[i] == shelfPicker.SelectedItem.ToString())
                 {
-                    RackLabel.Text = rackNames[i];
+                    RackLabel.Text = "Rack: " + rackNames[i];
                 }
             }
         }
