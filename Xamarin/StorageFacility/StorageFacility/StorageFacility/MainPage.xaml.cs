@@ -86,5 +86,10 @@ namespace StorageFacility
         {
             await Navigation.PushAsync(new RegisterProduct());
         }
+
+        private async void Find_Product_Page(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new FindProducts());
+        }
     }
 }

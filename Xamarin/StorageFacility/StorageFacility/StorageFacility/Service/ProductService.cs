@@ -7,8 +7,14 @@ namespace StorageFacility.Service
 {
     class ProductService : IProductService
     {
-        static HttpClient client = new HttpClient();
-        static string HostName = "https://test.baage-it.dk";
+        static HttpClient client;
+
+        static string HostName = EnvironmentFactory.GetHostNameLocation();
+
+        public ProductService()
+        {
+            client = EnvironmentFactory.GetHttpClient();
+        }
 
         public async Task<bool> CreateProduct(string name, string barcode)
         {
