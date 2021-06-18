@@ -1,5 +1,4 @@
 ﻿using StorageFacility.DTO;
-﻿using StorageFacility.Class;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

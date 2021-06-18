@@ -10,8 +10,8 @@ namespace StorageFacility
 
         public static string GetHostNameLocation()
         {
-            //return "https://localhost:44398";
-            return "https://test.baage-it.dk";
+            return "https://localhost:44398";
+            //return "https://test.baage-it.dk";
         }
 
         public static bool EnforceSSLVerification()
