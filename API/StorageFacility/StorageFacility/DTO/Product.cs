@@ -5,7 +5,7 @@ namespace StorageFacility.DTO
 {
     public class Product
     {
-        public Product(string barcode, string productName)
+        public Product(string barcode, string name)
         {
             if (!Regex.IsMatch(barcode, "^[0-9]{13}$"))
             {
@@ -13,7 +13,7 @@ namespace StorageFacility.DTO
             }
 
             Barcode = ulong.Parse(barcode);
-            Name = productName;
+            Name = name;
         }
 
         public string Name { get; private set; }

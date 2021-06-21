@@ -2,9 +2,9 @@
 {
     public class Shelf
     {
-        public Shelf(string shelfName, string rackName)
+        public Shelf(string name, string rackName)
         {
-            Name = shelfName;
+            Name = name;
             RackName = rackName;
         }
         
