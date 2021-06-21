@@ -1,6 +1,6 @@
-﻿using StorageFacility.Class;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using StorageFacility.DTO;
 
 namespace StorageFacility.Service
 {

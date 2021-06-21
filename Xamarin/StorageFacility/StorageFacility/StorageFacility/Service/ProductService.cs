@@ -1,18 +1,24 @@
 ﻿using Newtonsoft.Json.Linq;
-using StorageFacility.Class;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using StorageFacility.DTO;
 
 namespace StorageFacility.Service
 {
     class ProductService : IProductService
     {
-        //Initation of HTTPClient and Hostname string
-        static HttpClient client = new HttpClient();
-        static string HostName = "https://test.baage-it.dk";
+        static HttpClient client;
+
+        static string HostName = EnvironmentFactory.GetHostNameLocation();
+
+        public ProductService()
+        {
+            client = EnvironmentFactory.GetHttpClient();
+        }
+
 
 
         /// <summary>

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using StorageFacility.DTO;
 
 namespace StorageFacility.Service
 {
@@ -31,7 +32,7 @@ namespace StorageFacility.Service
                 MySqlDataReader reader = comm.ExecuteReader();
                 while (reader.Read())
                 {
-                    products.Add(new Product(reader.GetUInt64("Barcode"), reader.GetString("Name")));
+                    products.Add(new Product(reader.GetUInt64("Barcode").ToString(), reader.GetString("Name")));
                 }
             }
             catch

@@ -13,8 +13,15 @@ namespace StorageFacility.Service
     {
         // HTTP Client
         // HostName String
-        static HttpClient client = new HttpClient();
-        static string HostName = "https://test.baage-it.dk";
+        static HttpClient client;
+
+        static string HostName = EnvironmentFactory.GetHostNameLocation();
+
+        public RackService()
+        {
+            client = EnvironmentFactory.GetHttpClient();
+        }
+
 
         /// <summary>
         /// Sends a post to the API, to create a Rack. Based around the parameter

@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json.Linq;
-using StorageFacility.Class;
 using StorageFacility.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StorageFacility.DTO;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -63,7 +63,7 @@ namespace StorageFacility
                     barcode = barcodes[i];
                 }
             }
-
+            //TODO --MBA Ensure that on 400 an exception is not thrown, and the user is aware that the shelf already contains said product.
             bool resultBool = await shelfService.AddProductToShelf(rack, shelf, barcode);
 
             if (resultBool)
@@ -105,7 +105,7 @@ namespace StorageFacility
             foreach (var item in products)
             {
                 productNames.Add(item.Name);
-                barcodes.Add(item.Barcode);
+                barcodes.Add(item.Barcode.ToString());
             }
             ProductPicker.ItemsSource = productNames;
             ProductPicker.SelectedIndex = 0;

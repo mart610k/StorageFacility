@@ -1,18 +1,24 @@
 ﻿using Newtonsoft.Json.Linq;
-using StorageFacility.Class;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using StorageFacility.DTO;
 
 namespace StorageFacility.Service
 {
     class ShelfService : IShelfService
     {
-        static HttpClient client = new HttpClient();
-        static string HostName = "https://test.baage-it.dk";
+        static HttpClient client;
+
+        static string HostName = EnvironmentFactory.GetHostNameLocation();
+
+        public ShelfService()
+        {
+            client = EnvironmentFactory.GetHttpClient();
+        }
 
         /// <summary>
         /// Adds a product to a shelf, based on the parameters
@@ -62,6 +68,22 @@ namespace StorageFacility.Service
             }
         }
 
+        public async Task<List<ShelfProductAmount>> GetProductsFromBarcode(string productBarcode)
+        {
+            HttpResponseMessage response = await client.GetAsync(
+                string.Format("{0}/api/Shelf/find/product?productID={1}", HostName, productBarcode));
+            response.EnsureSuccessStatusCode();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                 return JArray.Parse(response.Content.ReadAsStringAsync().Result).ToObject<List<ShelfProductAmount>>();
+            }
+            else
+            {
+                return new List<ShelfProductAmount>();
+             }
+        }
+        
         /// <summary>
         /// Gets the shelves from the API
         /// Returns a list of shelves
