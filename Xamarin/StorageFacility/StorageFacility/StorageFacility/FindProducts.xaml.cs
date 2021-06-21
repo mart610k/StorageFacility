@@ -1,4 +1,5 @@
-﻿using StorageFacility.DTO;
+﻿using StorageFacility.Communication;
+using StorageFacility.DTO;
 using StorageFacility.Service;
 using System;
 using System.Collections.Generic;
@@ -25,6 +26,22 @@ namespace StorageFacility
             shelfProductList.ItemsSource = ProductsFound;
 
             base.OnAppearing();
+            MessagingCenter.Subscribe<IMessageSender, string>(this, "BarcodeScanned", (sender, barcode) =>
+            {
+                BarcodeField.Text = barcode;
+               
+            });
+
+            if (Device.RuntimePlatform == Device.UWP)
+            {
+                ScanButton.IsEnabled = false;
+            }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            MessagingCenter.Unsubscribe<IMessageSender, string>(this, "BarcodeScanned");
+            return base.OnBackButtonPressed();
         }
 
         public FindProducts()
@@ -32,6 +49,12 @@ namespace StorageFacility
             ProductsFound = new ObservableCollection<ShelfProductAmount>();
 
             InitializeComponent();
+        }
+        
+        private async void ScanBarcode(object sender, EventArgs e)
+        {
+            ProductsFound.Clear();
+            await Navigation.PushAsync(new BarcodeScanner());
         }
 
         private async void FindProductsByBarcode(object sender, EventArgs e)
