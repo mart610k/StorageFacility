@@ -32,7 +32,7 @@ namespace StorageFacility.Service
                 MySqlDataReader reader = comm.ExecuteReader();
                 while (reader.Read())
                 {
-                    products.Add(new Product(reader.GetString("Barcode"), reader.GetString("Name")));
+                    products.Add(new Product(reader.GetUInt64("Barcode").ToString(), reader.GetString("Name")));
                 }
             }
             catch
