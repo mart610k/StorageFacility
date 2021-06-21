@@ -38,7 +38,7 @@ namespace StorageFacility
         {
             ProductsFound.Clear();
 
-            List<ShelfProductAmount> test = await ShelfService.GetProductsFromBarcde(BarcodeField.Text);
+            List<ShelfProductAmount> test = await ShelfService.GetProductsFromBarcode(BarcodeField.Text);
             for (int i = 0; i < test.Count; i++)
             {
                 ProductsFound.Add(test[i]);

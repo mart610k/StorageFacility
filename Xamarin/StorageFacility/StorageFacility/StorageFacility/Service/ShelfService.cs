@@ -68,7 +68,7 @@ namespace StorageFacility.Service
             }
         }
 
-        public async Task<List<ShelfProductAmount>> GetProductsFromBarcde(string productBarcode)
+        public async Task<List<ShelfProductAmount>> GetProductsFromBarcode(string productBarcode)
         {
             HttpResponseMessage response = await client.GetAsync(
                 string.Format("{0}/api/Shelf/find/product?productID={1}", HostName, productBarcode));
