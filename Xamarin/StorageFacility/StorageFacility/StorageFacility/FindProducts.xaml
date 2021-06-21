@@ -7,6 +7,7 @@
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="1*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
@@ -14,7 +15,8 @@
                 </Grid.RowDefinitions>
                 
                 <Entry x:Name="BarcodeField" Grid.Column="0" Placeholder="Type in Barcode"></Entry>
-                <Button Text="Find Products" Grid.Column="1" Clicked="FindProductsByBarcode"></Button>
+                <Button x:Name="ScanButton" Text="Scan" Grid.Column="1" Clicked="ScanBarcode"></Button>
+                <Button Text="Search" Grid.Column="2" Clicked="FindProductsByBarcode"></Button>
                 
             </Grid>
             
