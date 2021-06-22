@@ -4,9 +4,8 @@
              x:Class="StorageFacility.AddToShelf">
     <ContentPage.Content>
         <StackLayout>
-            <Picker x:Name="shelfPicker" SelectedIndexChanged="shelfPicker_SelectedIndexChanged"></Picker>
-            <Label x:Name="RackLabel"></Label>
-            <Picker x:Name="ProductPicker"></Picker>
+            <Picker x:Name="shelfPicker" ItemDisplayBinding="{Binding NameWithRack}"/>
+            <Picker x:Name="productPicker" ItemDisplayBinding="{Binding Name}"/>
             <Button Clicked="AddProductToShelf" Text="Add To Shelf" BackgroundColor="LightSalmon"></Button>
         </StackLayout>
     </ContentPage.Content>

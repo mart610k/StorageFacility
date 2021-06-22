@@ -15,5 +15,7 @@
         public string Name { get; private set; }
 
         public string RackName { get; private set; }
+
+        public string NameWithRack { get { return Name + " (" + RackName + ")"; } }
     }
 }

@@ -10,12 +10,13 @@ namespace StorageFacility.Service
 {
     class ProductService : IProductService
     {
-        static HttpClient client;
+        private HttpClient client;
 
-        static string HostName = EnvironmentFactory.GetHostNameLocation();
+        private string hostName = EnvironmentFactory.GetHostNameLocation();
 
         public ProductService()
         {
+            hostName = EnvironmentFactory.GetHostNameLocation();
             client = EnvironmentFactory.GetHttpClient();
         }
 
@@ -32,7 +33,7 @@ namespace StorageFacility.Service
         {
             string link = string.Format(
                     "{0}/api/Product?name={1}&barcode={2}",
-                    HostName,
+                    hostName,
                     name,
                     barcode);
 
@@ -60,7 +61,7 @@ namespace StorageFacility.Service
         /// <returns></returns>
         public async Task<List<Product>> GetProducts()
         {
-            HttpResponseMessage response = await client.GetAsync(string.Format("{0}/api/Product", HostName));
+            HttpResponseMessage response = await client.GetAsync(string.Format("{0}/api/Product", hostName));
             response.EnsureSuccessStatusCode();
 
             if (response.StatusCode == HttpStatusCode.OK)

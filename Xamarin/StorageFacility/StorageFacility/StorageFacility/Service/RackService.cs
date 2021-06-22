@@ -13,12 +13,13 @@ namespace StorageFacility.Service
     {
         // HTTP Client
         // HostName String
-        static HttpClient client;
+        private HttpClient client;
 
-        static string HostName = EnvironmentFactory.GetHostNameLocation();
+        private string hostName = EnvironmentFactory.GetHostNameLocation();
 
         public RackService()
         {
+            hostName = EnvironmentFactory.GetHostNameLocation();
             client = EnvironmentFactory.GetHttpClient();
         }
 
@@ -32,7 +33,7 @@ namespace StorageFacility.Service
         public async Task<bool> CreateRack(string name)
         {
             HttpResponseMessage response = await client.PostAsync(
-                string.Format("{0}/api/Rack?name={1}", HostName, name), null);
+                string.Format("{0}/api/Rack?name={1}", hostName, name), null);
             response.EnsureSuccessStatusCode();
 
             if (response.StatusCode == HttpStatusCode.OK)
@@ -54,7 +55,7 @@ namespace StorageFacility.Service
         public async Task<List<string>> GetRacks()
         {
             HttpResponseMessage response = await client.GetAsync(
-                string.Format("{0}/api/Rack", HostName));
+                string.Format("{0}/api/Rack", hostName));
             response.EnsureSuccessStatusCode();
 
             if (response.StatusCode == HttpStatusCode.OK)

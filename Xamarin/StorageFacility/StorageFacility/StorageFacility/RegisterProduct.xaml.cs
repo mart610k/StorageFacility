@@ -31,13 +31,13 @@ namespace StorageFacility
 
             if (!Regex.IsMatch(BarcodeEntry.Text, "^[0-9]{13}$"))
             {
-                await DisplayAlert("barcode", "Barcode does not fit expected lenght or have characters in it", "OK");
+                await DisplayAlert("barcode format error", "Barcode does not fit expected lenght or have characters in it", "OK");
                 hadValidationErrors = true;
             }
 
             if(NameEntry.Text.Length > 64)
             {
-                await DisplayAlert("Name", "Product name must be below 64 charcters", "OK");
+                await DisplayAlert("Product name too long", "Product name must be below 64 charcters", "OK");
 
                 hadValidationErrors = true;
             }
@@ -52,6 +52,7 @@ namespace StorageFacility
             {
                 await productService.CreateProduct(NameEntry.Text, BarcodeEntry.Text);
                 await DisplayAlert("Successfull", string.Format("the product {0} was created with the barcode {1}", NameEntry.Text, BarcodeEntry.Text), "OK");
+                await Navigation.PopAsync();
             }
         }
     }
