@@ -37,6 +37,11 @@ namespace StorageFacility.Controllers
             }
         }
 
+        /// <summary>
+        /// Get Products through HTTPGet
+        /// with product logic method
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetProducts()
         {

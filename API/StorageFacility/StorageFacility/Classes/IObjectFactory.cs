@@ -6,6 +6,9 @@ using StorageFacility.Service;
 
 namespace StorageFacility.Classes
 {
+    /// <summary>
+    /// Interface for object factory
+    /// </summary>
     public interface IObjectFactory
     {
         IAuthService GetAuthService();

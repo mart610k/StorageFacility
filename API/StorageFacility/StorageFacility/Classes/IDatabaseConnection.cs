@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 
 namespace StorageFacility.Classes
 {
+    /// <summary>
+    /// Interface for database conn
+    /// </summary>
     public interface IDatabaseConnection
     {
-
         string GetConnectionString();
     }
 }

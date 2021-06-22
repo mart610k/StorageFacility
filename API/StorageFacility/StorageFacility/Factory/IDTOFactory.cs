@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace StorageFacility.Factory
 {
+    /// <summary>
+    /// Interface for the DTO Factory
+    /// </summary>
     public interface IDTOFactory
     {
         Shelf GetShelf(string shelfName, string rackName);

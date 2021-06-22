@@ -17,6 +17,10 @@ namespace StorageFacility.Service
             this.databaseConnection = databaseConnection;
         }
 
+        /// <summary>
+        /// Get's a list of products
+        /// </summary>
+        /// <returns></returns>
         public List<Product> GetProducts()
         {
             List<Product> products = new List<Product>();
@@ -50,6 +54,12 @@ namespace StorageFacility.Service
             return products;
         }
 
+        /// <summary>
+        /// Registers a product based on Barcode and Name Parameter
+        /// </summary>
+        /// <param name="barcode"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
         public bool Register(ulong barcode, string name)
         {
             MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());

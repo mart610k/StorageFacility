@@ -36,6 +36,12 @@ namespace StorageFacility.Controllers
             }
         }
 
+        /// <summary>
+        /// Finds a product based on product id
+        /// with shelf logic method
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
         [HttpGet("find/product")]
         public IActionResult GetProductFromShelves(string productID)
         {
@@ -49,6 +55,14 @@ namespace StorageFacility.Controllers
             }
         }
 
+        /// <summary>
+        /// Adds a product to a shelf based on inputs
+        /// with shelf logic method
+        /// </summary>
+        /// <param name="rackName"></param>
+        /// <param name="shelfName"></param>
+        /// <param name="barcode"></param>
+        /// <returns></returns>
         [HttpPost("AddToShelf")]
         public IActionResult AddProductToShelf(string rackName, string shelfName, string barcode)
         {
@@ -63,6 +77,11 @@ namespace StorageFacility.Controllers
             }
         }
 
+        /// <summary>
+        /// Get's shelves from API
+        /// with Shelf logic Method
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetShelves()
         {

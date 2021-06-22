@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace StorageFacility.Service
 {
+    /// <summary>
+    /// Interface for the shelf service
+    /// </summary>
     public interface IShelfService
     {
         bool Register(string name, string rackName);

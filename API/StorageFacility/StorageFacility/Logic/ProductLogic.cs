@@ -77,6 +77,10 @@ namespace StorageFacility.Logic
 
         }
 
+        /// <summary>
+        /// Gets a list of products
+        /// </summary>
+        /// <returns></returns>
         public List<Product> GetProducts()
         {
             if (authService.UserAllowed(""))

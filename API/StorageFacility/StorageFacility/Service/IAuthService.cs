@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace StorageFacility.Service
 {
+    /// <summary>
+    /// Interface for the Authentication Service
+    /// </summary>
     public interface IAuthService
     {
         bool UserAllowed(string name);

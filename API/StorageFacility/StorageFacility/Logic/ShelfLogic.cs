@@ -9,11 +9,15 @@ namespace StorageFacility.Logic
 {
     public class ShelfLogic : IShelfLogic
     {
+        // Variables of Services
         IAuthService authService;
         IFileAccess fileAccess;
         IShelfService shelfService;
         IBarcodeVerifier barcodeVerifier;
 
+        /// <summary>
+        /// Production Constructor
+        /// </summary>
         public ShelfLogic()
         {
             IObjectFactory objectFactory = new ObjectFactory();
@@ -25,7 +29,13 @@ namespace StorageFacility.Logic
             barcodeVerifier = objectFactory.GetEAN13BarcodeVerifier();
         }
         
-
+        /// <summary>
+        /// Mockup Constructor
+        /// </summary>
+        /// <param name="barcodeVerifier"></param>
+        /// <param name="fileAccess"></param>
+        /// <param name="shelfService"></param>
+        /// <param name="authService"></param>
         public ShelfLogic(IBarcodeVerifier barcodeVerifier,IFileAccess fileAccess,IShelfService shelfService, IAuthService authService)
         {
             this.barcodeVerifier = barcodeVerifier;
@@ -34,6 +44,12 @@ namespace StorageFacility.Logic
             this.shelfService = shelfService;
         }
 
+        /// <summary>
+        /// Get's a list of products based on the Product ID
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="productID"></param>
+        /// <returns></returns>
         public List<ShelfProductAmount> GetShelvesContainingProductByID(string username,string productID)
         {
             try
@@ -70,6 +86,12 @@ namespace StorageFacility.Logic
             }
         }
 
+        /// <summary>
+        /// Adds a product to a shelfm based on the inputs
+        /// </summary>
+        /// <param name="rackName"></param>
+        /// <param name="shelfName"></param>
+        /// <param name="barcode"></param>
         public void AddProductToShelf(string rackName, string shelfName, string barcode)
         {
             if (authService.UserAllowed(""))
@@ -78,6 +100,13 @@ namespace StorageFacility.Logic
             }
         }
 
+        /// <summary>
+        /// Adds an amount to a product
+        /// </summary>
+        /// <param name="rackName"></param>
+        /// <param name="shelfName"></param>
+        /// <param name="barcode"></param>
+        /// <param name="amount"></param>
         public void AddProductAmount(string rackName, string shelfName, string barcode, int amount)
         {
             if (authService.UserAllowed(""))
@@ -86,6 +115,13 @@ namespace StorageFacility.Logic
             }
         }
 
+        /// <summary>
+        /// Removes an amount of products
+        /// </summary>
+        /// <param name="rackName"></param>
+        /// <param name="shelfName"></param>
+        /// <param name="barcode"></param>
+        /// <param name="amount"></param>
         public void RemoveProductAmount(string rackName, string shelfName, string barcode, int amount)
         {
             if (authService.UserAllowed(""))
@@ -94,6 +130,10 @@ namespace StorageFacility.Logic
             }
         }
 
+        /// <summary>
+        /// Gets a list of shelves
+        /// </summary>
+        /// <returns></returns>
         public List<Shelf> GetShelves()
         {
             if (authService.UserAllowed(""))

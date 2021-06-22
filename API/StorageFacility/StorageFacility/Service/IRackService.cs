@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace StorageFacility.Service
 {
+    /// <summary>
+    /// Interface for the rack service
+    /// </summary>
     public interface IRackService
     {
         bool Register(string name);

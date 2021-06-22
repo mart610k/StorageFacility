@@ -5,6 +5,11 @@ namespace StorageFacility.DTO
 {
     public class Product
     {
+        /// <summary>
+        /// Product Name and Barcode 
+        /// </summary>
+        /// <param name="barcode"></param>
+        /// <param name="name"></param>
         public Product(string barcode, string name)
         {
             if (!Regex.IsMatch(barcode, "^[0-9]{13}$"))

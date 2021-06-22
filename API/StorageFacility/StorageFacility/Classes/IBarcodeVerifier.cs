@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace StorageFacility.Classes
 {
+    /// <summary>
+    /// Interface for barcode verifier
+    /// </summary>
     public interface IBarcodeVerifier
     {
         /// <summary>

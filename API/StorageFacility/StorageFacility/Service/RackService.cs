@@ -17,6 +17,10 @@ namespace StorageFacility.Service
             this.databaseConnection = databaseConnection;
         }
 
+        /// <summary>
+        /// Gets a list of racks
+        /// </summary>
+        /// <returns></returns>
         public List<string> GetRacks()
         {
             MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
@@ -51,6 +55,11 @@ namespace StorageFacility.Service
             return Racks;
         }
 
+        /// <summary>
+        /// Registers a rack based on input parameter name
+        /// </summary>
+        /// <param name="rackname"></param>
+        /// <returns></returns>
         public bool Register(string rackname)
         {
             MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());

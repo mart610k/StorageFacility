@@ -7,6 +7,12 @@ namespace StorageFacility.DTO
 {
     public class ShelfProductAmount
     {
+        /// <summary>
+        /// Product on a specific shelf, with a specific amount
+        /// </summary>
+        /// <param name="shelf"></param>
+        /// <param name="product"></param>
+        /// <param name="amount"></param>
         public ShelfProductAmount(Shelf shelf, Product product, byte amount)
         {
             Shelf = shelf;

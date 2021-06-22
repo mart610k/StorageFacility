@@ -7,6 +7,9 @@ using StorageFacility.DTO;
 
 namespace StorageFacility.Service
 {
+    /// <summary>
+    /// Interface for the Product Service
+    /// </summary>
     public interface IProductService
     {
         bool Register(ulong barcode, string name);
