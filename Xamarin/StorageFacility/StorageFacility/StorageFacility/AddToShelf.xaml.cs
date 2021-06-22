@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StorageFacility.DTO;
-
+using System.Collections.ObjectModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -20,11 +20,16 @@ namespace StorageFacility
         IProductService ProductService = new ProductService();
 
         // Initiating Lists
-        List<string> shelfNames = new List<string>();
-        List<string> rackNames = new List<string>();
-        List<string> productNames = new List<string>();
-        List<string> barcodes = new List<string>();
+        ObservableCollection<Shelf> shelves = new ObservableCollection<Shelf>();
+        ObservableCollection<Product> products = new ObservableCollection<Product>();
 
+
+        protected override void OnAppearing()
+        {
+            shelfPicker.ItemsSource = shelves;
+            productPicker.ItemsSource = products;
+            base.OnAppearing();
+        }
 
         public AddToShelf()
         {
@@ -42,27 +47,35 @@ namespace StorageFacility
         /// <param name="e"></param>
         private async void AddProductToShelf(object sender, EventArgs e)
         {
-            string shelf = shelfPicker.SelectedItem.ToString();
-            string rack = "";
+            string shelf = null;
+            string rack = null;
+            string product = null;
+            string barcode = null;
 
-            for (int i = 0; i < shelfNames.Count; i++)
+            if (shelfPicker.SelectedItem == null)
             {
-                if (shelfNames[i] == shelf)
-                {
-                    rack = rackNames[i];
-                }
+                await DisplayAlert("Select Shelf", "You have not selected a shelf", "OK");
+                return;
             }
 
-            string product = ProductPicker.SelectedItem.ToString();
-            string barcode = "";
-
-            for (int i = 0; i < productNames.Count; i++)
+            if (shelfPicker.SelectedItem is Shelf)
             {
-                if (productNames[i] == product)
-                {
-                    barcode = barcodes[i];
-                }
+                shelf = ((Shelf)shelfPicker.SelectedItem).Name;
+                rack = ((Shelf)shelfPicker.SelectedItem).RackName;
             }
+
+            if (productPicker.SelectedItem == null)
+            {
+                await DisplayAlert("Select Product", "You have not selected a product", "OK");
+                return;
+            }
+
+            if (productPicker.SelectedItem is Product)
+            {
+                barcode = ((Product)productPicker.SelectedItem).Barcode.ToString();
+                product = ((Product)productPicker.SelectedItem).Name;
+            }
+
             //TODO --MBA Ensure that on 400 an exception is not thrown, and the user is aware that the shelf already contains said product.
             bool resultBool = await shelfService.AddProductToShelf(rack, shelf, barcode);
 
@@ -83,13 +96,11 @@ namespace StorageFacility
         /// </summary>
         private async void GetShelves()
         {
-            List<Shelf> shelves = await shelfService.GetShelves();
-            foreach (var item in shelves)
+            List<Shelf> tempShelves = await shelfService.GetShelves();
+            foreach (Shelf item in tempShelves)
             {
-                shelfNames.Add(item.Name);
-                rackNames.Add(item.RackName);
+                shelves.Add(item);
             }
-            shelfPicker.ItemsSource = shelfNames;
             shelfPicker.SelectedIndex = 0;
             
         }
@@ -100,26 +111,13 @@ namespace StorageFacility
         /// </summary>
         private async void GetProducts()
         {
-            List<Product> products = await ProductService.GetProducts();
+            List<Product> tempProduct = await ProductService.GetProducts();
 
-            foreach (var item in products)
+            foreach (Product product in tempProduct)
             {
-                productNames.Add(item.Name);
-                barcodes.Add(item.Barcode.ToString());
+                products.Add(product);
             }
-            ProductPicker.ItemsSource = productNames;
-            ProductPicker.SelectedIndex = 0;
-        }
-
-        private void shelfPicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            for (int i = 0; i < shelfNames.Count; i++)
-            {
-                if (shelfNames[i] == shelfPicker.SelectedItem.ToString())
-                {
-                    RackLabel.Text = "Rack: " + rackNames[i];
-                }
-            }
+            productPicker.SelectedIndex = 0;
         }
     }
 }
