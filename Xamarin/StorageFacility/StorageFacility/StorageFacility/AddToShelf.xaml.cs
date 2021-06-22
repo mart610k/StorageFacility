@@ -78,7 +78,7 @@ namespace StorageFacility
         }
 
         /// <summary>
-        /// Get's the shelves
+        /// Gets the shelves
         /// Adds to the respective list
         /// </summary>
         private async void GetShelves()

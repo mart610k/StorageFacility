@@ -1,6 +1,4 @@
-﻿using System;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
+﻿using Xamarin.Forms;
 
 namespace StorageFacility
 {
@@ -9,7 +7,7 @@ namespace StorageFacility
         public App()
         {
             InitializeComponent();
-
+            //Allows for Navigation to happen bewtween different pages.
             MainPage = new NavigationPage(new MainPage());
 
         }

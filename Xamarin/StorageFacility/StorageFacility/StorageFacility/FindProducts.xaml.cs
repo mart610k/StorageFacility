@@ -1,4 +1,5 @@
-﻿using StorageFacility.DTO;
+﻿using StorageFacility.Communication;
+using StorageFacility.DTO;
 using StorageFacility.Service;
 using System;
 using System.Collections.Generic;
@@ -19,12 +20,30 @@ namespace StorageFacility
 
         public ObservableCollection<ShelfProductAmount> ProductsFound  { get; private set; }
 
-
+        /// <summary>
+        /// subscribe to obtain the barcode message, and check device platform.
+        /// </summary>
         protected override void OnAppearing()
         {
             shelfProductList.ItemsSource = ProductsFound;
 
             base.OnAppearing();
+            MessagingCenter.Subscribe<IMessageSender, string>(this, "BarcodeScanned", (sender, barcode) =>
+            {
+                BarcodeField.Text = barcode;
+               
+            });
+
+            if (Device.RuntimePlatform == Device.UWP)
+            {
+                ScanButton.IsEnabled = false;
+            }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            MessagingCenter.Unsubscribe<IMessageSender, string>(this, "BarcodeScanned");
+            return base.OnBackButtonPressed();
         }
 
         public FindProducts()
@@ -33,7 +52,19 @@ namespace StorageFacility
 
             InitializeComponent();
         }
+        
+        /// <summary>
+        /// Navigates to the content page where the scanning barcodes can happen
+        /// </summary>
+        private async void ScanBarcode(object sender, EventArgs e)
+        {
+            ProductsFound.Clear();
+            await Navigation.PushAsync(new BarcodeScanner());
+        }
 
+        /// <summary>
+        /// Calls the services to find product by their barcode
+        /// </summary>
         private async void FindProductsByBarcode(object sender, EventArgs e)
         {
             ProductsFound.Clear();

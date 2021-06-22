@@ -3,6 +3,9 @@ using System.Text.RegularExpressions;
 
 namespace StorageFacility.DTO
 {
+    /// <summary>
+    /// Contains information about a product.
+    /// </summary>
     public class Product
     {
 
