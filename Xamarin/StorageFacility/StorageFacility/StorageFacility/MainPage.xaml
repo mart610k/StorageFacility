@@ -5,14 +5,8 @@
 
     <StackLayout>
         <Button Clicked="Create_New_Rack" Text="Create New Rack" BackgroundColor="BurlyWood"></Button>
-        <Button Clicked="Shelf_Visible" Text="Create New Shelf" BackgroundColor="CadetBlue"></Button>
-        <ContentView IsVisible="false" x:Name="newShelfPopup">
-            <StackLayout>
-                <Entry x:Name="shelfName" Placeholder="Write a shelf name"></Entry>
-                <Picker x:Name="rackPicker"></Picker>
-                <Button Clicked="CreateShelf" BackgroundColor="Coral" Text="Create Shelf"></Button>
-            </StackLayout>
-        </ContentView>
+        <Button Clicked="CreateShelf" Text="Create New Shelf" BackgroundColor="CadetBlue"></Button>
+        
         <Button Clicked="Show_Register_Product" Text="Create New Product" BackgroundColor="BurlyWood"></Button>
         <Button Clicked="Find_Product_Page" Text="Find Products On Shelves" BackgroundColor="HotPink"></Button>
         <Button Clicked="Show_AddToShelf" Text="Add Product to Shelf" BackgroundColor="LightPink"></Button>
