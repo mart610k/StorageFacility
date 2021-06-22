@@ -27,9 +27,9 @@ namespace StorageFacility
         private async void Validate_Input_And_Send(object sender, EventArgs e)
         {
             bool hadValidationErrors = false;
+            NameEntry.Text = NameEntry.Text.TrimEnd();
 
-
-            if(!Regex.IsMatch(BarcodeEntry.Text, "^[0-9]{13}$"))
+            if (!Regex.IsMatch(BarcodeEntry.Text, "^[0-9]{13}$"))
             {
                 await DisplayAlert("barcode", "Barcode does not fit expected lenght or have characters in it", "OK");
                 hadValidationErrors = true;
@@ -38,6 +38,12 @@ namespace StorageFacility
             if(NameEntry.Text.Length > 64)
             {
                 await DisplayAlert("Name", "Product name must be below 64 charcters", "OK");
+
+                hadValidationErrors = true;
+            }
+            else if (NameEntry.Text.Length == 0)
+            {
+                await DisplayAlert("Product name cannot be empty", "The name of a product cannot be empty", "OK");
 
                 hadValidationErrors = true;
             }
