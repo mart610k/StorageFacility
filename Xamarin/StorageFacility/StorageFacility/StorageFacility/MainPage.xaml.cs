@@ -87,11 +87,17 @@ namespace StorageFacility
             await Navigation.PushAsync(new RegisterProduct());
         }
 
+        /// <summary>
+        /// Navigates to the find products content page
+        /// </summary>
         private async void Find_Product_Page(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new FindProducts());
         }
 
+        /// <summary>
+        /// Shows the content page to add product to shelf
+        /// </summary>
         private async void Show_AddToShelf(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AddToShelf());

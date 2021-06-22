@@ -20,7 +20,9 @@ namespace StorageFacility
 
         public ObservableCollection<ShelfProductAmount> ProductsFound  { get; private set; }
 
-
+        /// <summary>
+        /// subscribe to obtain the barcode message, and check device platform.
+        /// </summary>
         protected override void OnAppearing()
         {
             shelfProductList.ItemsSource = ProductsFound;
@@ -51,12 +53,18 @@ namespace StorageFacility
             InitializeComponent();
         }
         
+        /// <summary>
+        /// Navigates to the content page where the scanning barcodes can happen
+        /// </summary>
         private async void ScanBarcode(object sender, EventArgs e)
         {
             ProductsFound.Clear();
             await Navigation.PushAsync(new BarcodeScanner());
         }
 
+        /// <summary>
+        /// Calls the services to find product by their barcode
+        /// </summary>
         private async void FindProductsByBarcode(object sender, EventArgs e)
         {
             ProductsFound.Clear();

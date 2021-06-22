@@ -1,5 +1,8 @@
 ﻿namespace StorageFacility.DTO
 {
+    /// <summary>
+    /// Contains information about a shelf and the rack its attached to
+    /// </summary>
     public class Shelf
     {
 
@@ -9,7 +12,7 @@
             RackName = rackName;
         }
 
-        public string Name { private set; get; }
+        public string Name { get; private set; }
 
         public string RackName { get; private set; }
     }

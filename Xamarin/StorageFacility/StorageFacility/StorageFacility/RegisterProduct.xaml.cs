@@ -21,6 +21,9 @@ namespace StorageFacility
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Checks input and sends the data to create the product
+        /// </summary>
         private async void Validate_Input_And_Send(object sender, EventArgs e)
         {
             bool hadValidationErrors = false;
