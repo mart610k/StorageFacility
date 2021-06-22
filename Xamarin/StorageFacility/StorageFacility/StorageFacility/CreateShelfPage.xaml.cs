@@ -43,6 +43,7 @@ namespace StorageFacility
                 if (resultBool)
                 {
                     await DisplayAlert("New Shelf", string.Format("Shelf {0} have been created, on Rack {1}", shelfName.Text, rackPicker.SelectedItem), "OK");
+                    await Navigation.PopAsync();
                 }
                 else
                 {
