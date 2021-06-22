@@ -4,10 +4,15 @@
              x:Class="StorageFacility.RegisterProduct">
     <ContentPage.Content>
         <StackLayout>
-            
             <Label HorizontalOptions="CenterAndExpand" Text="Type in barcode"></Label>
-
-            <Entry Placeholder="Product Barcode" x:Name="BarcodeEntry"  />
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0" Placeholder="Product Barcode" x:Name="BarcodeField" />
+                <Button Grid.Column="1" x:Name="ScanBarcodeButton" Text="Scan" Clicked="Scan_Barcode"></Button>
+            </Grid>
             <Label HorizontalOptions="CenterAndExpand" Text="Type in the product name"></Label>
 
             <Entry Placeholder="Product Name" x:Name="NameEntry" />
