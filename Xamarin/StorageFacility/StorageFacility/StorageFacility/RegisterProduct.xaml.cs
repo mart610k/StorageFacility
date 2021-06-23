@@ -66,6 +66,7 @@ namespace StorageFacility
             {
                 await productService.CreateProduct(NameEntry.Text, BarcodeField.Text);
                 await DisplayAlert("Successfull", string.Format("the product {0} was created with the barcode {1}", NameEntry.Text, BarcodeField.Text), "OK");
+                await Navigation.PopAsync();
             }
         }
 
