@@ -16,7 +16,13 @@
 
         public Shelf Shelf { get; private set; }
         public Product Product { get; private set; }
-
+        public string data
+        {
+            get
+            {
+                return Product.Name + " On " + Shelf.NameWithRack;
+            }
+        }
         public byte Amount { get; private set; }
     }
 }

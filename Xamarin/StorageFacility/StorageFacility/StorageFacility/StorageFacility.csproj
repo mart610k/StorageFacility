@@ -18,22 +18,25 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="BarcodeScanner.xaml">
+    <EmbeddedResource Update="ContentPages\BarcodeScanner.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="CreateRackPage.xaml">
+    <EmbeddedResource Update="ContentPages\AddProductAmount.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="CreateShelfPage.xaml">
+    <EmbeddedResource Update="ContentPages\CreateRackPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="FindProducts.xaml">
+    <EmbeddedResource Update="ContentPages\CreateShelfPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="RegisterProduct.xaml">
+    <EmbeddedResource Update="ContentPages\FindProducts.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="AddToShelf.xaml">
+    <EmbeddedResource Update="ContentPages\RegisterProduct.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="ContentPages\AddToShelf.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

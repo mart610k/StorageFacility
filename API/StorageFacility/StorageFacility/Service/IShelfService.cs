@@ -18,5 +18,6 @@ namespace StorageFacility.Service
         bool AddProductAmount(string rackName, string shelfName, string barcode, int amount);
         bool RemoveProductAmount(string rackName, string shelfName, string barcode, int amount);
         List<Shelf> GetShelves();
+        List<ShelfProductAmount> GetShelfProductAmounts();
     }
 }

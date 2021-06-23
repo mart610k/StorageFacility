@@ -13,8 +13,8 @@ namespace StorageFacility
         /// <returns>string containing the hostname</returns>
         public static string GetHostNameLocation()
         {
-            //return "https://localhost:44398";
-            return "https://test.baage-it.dk";
+            return "https://localhost:44398";
+            //return "https://test.baage-it.dk";
         }
 
         /// <summary>

@@ -55,6 +55,19 @@ namespace StorageFacility.Controllers
             }
         }
 
+        [HttpGet("get/product")]
+        public IActionResult GetProductAmount()
+        {
+            try
+            {
+                return Ok(shelfLogic.GetProductAmount());
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, e.Message);
+            }
+        }
+
         /// <summary>
         /// Adds a product to a shelf based on inputs
         /// with shelf logic method
@@ -69,6 +82,34 @@ namespace StorageFacility.Controllers
             try
             {
                 shelfLogic.AddProductToShelf(rackName, shelfName, barcode);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, e.Message);
+            }
+        }
+
+        [HttpPost("AddAmount")]
+        public IActionResult AddProductAmount(string rackName, string shelfName, string barcode, int amount)
+        {
+            try
+            {
+                shelfLogic.AddProductAmount(rackName, shelfName, barcode, amount);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, e.Message);
+            }
+        }
+
+        [HttpPost("RemoveAmount")]
+        public IActionResult RemoveProductAmount(string rackName, string shelfName, string barcode, int amount)
+        {
+            try
+            {
+                shelfLogic.RemoveProductAmount(rackName, shelfName, barcode, amount);
                 return Ok();
             }
             catch (Exception e)

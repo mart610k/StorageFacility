@@ -1,4 +1,5 @@
-﻿using StorageFacility.Service;
+﻿using StorageFacility.ContentPages;
+using StorageFacility.Service;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -68,6 +69,11 @@ namespace StorageFacility
         private async void Show_AddToShelf(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new AddToShelf());
+        }
+
+        private async void Show_AddProductAmount(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddProductAmount());
         }
     }
 }
