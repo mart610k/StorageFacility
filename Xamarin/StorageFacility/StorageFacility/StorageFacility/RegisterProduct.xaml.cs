@@ -1,4 +1,5 @@
-﻿using StorageFacility.Service;
+﻿using StorageFacility.Communication;
+using StorageFacility.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,25 @@ namespace StorageFacility
     public partial class RegisterProduct : ContentPage
     {
         IProductService productService = new ProductService();
+        protected override void OnAppearing()
+        {
+            MessagingCenter.Subscribe<IMessageSender, string>(this, "BarcodeScanned", (sender, barcode) =>
+            {
+                BarcodeField.Text = barcode;
+
+            });
+
+            if (Device.RuntimePlatform == Device.UWP)
+            {
+                ScanBarcodeButton.IsEnabled = false;
+            }
+        }
+
+        protected override bool OnBackButtonPressed()
+        {
+            MessagingCenter.Unsubscribe<IMessageSender, string>(this, "BarcodeScanned");
+            return base.OnBackButtonPressed();
+        }
 
         public RegisterProduct()
         {
@@ -27,33 +47,32 @@ namespace StorageFacility
         private async void Validate_Input_And_Send(object sender, EventArgs e)
         {
             bool hadValidationErrors = false;
-            NameEntry.Text = NameEntry.Text.TrimEnd();
 
-            if (!Regex.IsMatch(BarcodeEntry.Text, "^[0-9]{13}$"))
+
+            if(!Regex.IsMatch(BarcodeField.Text, "^[0-9]{13}$"))
             {
-                await DisplayAlert("barcode format error", "Barcode does not fit expected lenght or have characters in it", "OK");
+                await DisplayAlert("barcode", "Barcode does not fit expected lenght or have characters in it", "OK");
                 hadValidationErrors = true;
             }
 
             if(NameEntry.Text.Length > 64)
             {
-                await DisplayAlert("Product name too long", "Product name must be below 64 charcters", "OK");
-
-                hadValidationErrors = true;
-            }
-            else if (NameEntry.Text.Length == 0)
-            {
-                await DisplayAlert("Product name cannot be empty", "The name of a product cannot be empty", "OK");
+                await DisplayAlert("Name", "Product name must be below 64 charcters", "OK");
 
                 hadValidationErrors = true;
             }
 
             if (!hadValidationErrors)
             {
-                await productService.CreateProduct(NameEntry.Text, BarcodeEntry.Text);
-                await DisplayAlert("Successfull", string.Format("the product {0} was created with the barcode {1}", NameEntry.Text, BarcodeEntry.Text), "OK");
+                await productService.CreateProduct(NameEntry.Text, BarcodeField.Text);
+                await DisplayAlert("Successfull", string.Format("the product {0} was created with the barcode {1}", NameEntry.Text, BarcodeField.Text), "OK");
                 await Navigation.PopAsync();
             }
+        }
+
+        private async void Scan_Barcode(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new BarcodeScanner());
         }
     }
 }
