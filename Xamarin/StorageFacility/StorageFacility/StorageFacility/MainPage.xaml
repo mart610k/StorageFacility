@@ -11,6 +11,7 @@
         <Button Clicked="Find_Product_Page" Text="Find Products On Shelves" BackgroundColor="HotPink"></Button>
         <Button Clicked="Show_AddToShelf" Text="Add Product to Shelf" BackgroundColor="LightPink"></Button>
         <Button Clicked="Show_AddProductAmount" Text="Add Product Amount" BackgroundColor="Magenta"></Button>
+        <Button Clicked="Show_RemoveProductAmount" Text="Remove Product Amount" BackgroundColor="LemonChiffon"></Button>
     </StackLayout>
 
 </ContentPage>
