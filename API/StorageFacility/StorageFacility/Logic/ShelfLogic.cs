@@ -142,5 +142,14 @@ namespace StorageFacility.Logic
             }
             return null;
         }
+
+        public List<ShelfProductAmount> GetProductAmount()
+        {
+            if (authService.UserAllowed(""))
+            {
+                return shelfService.GetShelfProductAmounts();
+            }
+            return null;
+        }
     }
 }

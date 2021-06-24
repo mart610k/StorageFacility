@@ -27,5 +27,7 @@ namespace StorageFacility.Logic
         void RemoveProductAmount(string rackName, string shelfName, string barcode, int amount);
         
         List<Shelf> GetShelves();
+
+        List<ShelfProductAmount> GetProductAmount();
     }
 }

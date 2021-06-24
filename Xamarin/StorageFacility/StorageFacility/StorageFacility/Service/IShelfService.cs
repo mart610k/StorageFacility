@@ -35,5 +35,19 @@ namespace StorageFacility.Service
         /// </summary>
         /// <returns>A list of the shelves present on the API</returns>
         Task<List<Shelf>> GetShelves();
+
+        /// <summary>
+        /// Adds an amount to a product
+        /// based on the inputs
+        /// specifying the rack and shelf
+        /// </summary>
+        /// <param name="rackName"></param>
+        /// <param name="shelfName"></param>
+        /// <param name="barcode"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
+        Task<bool> AddProductAmount(string rackName, string shelfName, string barcode, int amount);
+
+        Task<List<ShelfProductAmount>> GetProductAmount();
     }
 }

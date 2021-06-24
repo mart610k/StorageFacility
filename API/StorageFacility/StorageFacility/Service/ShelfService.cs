@@ -63,6 +63,44 @@ namespace StorageFacility.Service
             return shelfProductAmounts;
         }
 
+        public List<ShelfProductAmount> GetShelfProductAmounts()
+        {
+            List<ShelfProductAmount> shelfProductAmounts = new List<ShelfProductAmount>();
+
+            MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
+
+            MySqlCommand comm = conn.CreateCommand();
+            comm.CommandText = "Select `Rack_Name`,`Shelf_Name`,`Product_BC`,`Amount`,`Name` from Shelf_Product_Amount Join Product on Shelf_Product_Amount.Product_BC = Product.Barcode;";
+
+            try
+            {
+                conn.Open();
+                MySqlDataReader reader = comm.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Shelf shelf = new Shelf(reader.GetString("Shelf_Name"), reader.GetString("Rack_Name"));
+                    Product product = new Product(reader.GetUInt64("Product_BC").ToString(), reader.GetString("Name"));
+
+                    ShelfProductAmount shelfProductAmount = new ShelfProductAmount(shelf, product, reader.GetByte("Amount"));
+
+                    shelfProductAmounts.Add(shelfProductAmount);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+            return shelfProductAmounts;
+        }
+
 
         /// <summary>
         /// Adds a product to a shelf, based on the 3 parameters
@@ -143,7 +181,7 @@ namespace StorageFacility.Service
 
             MySqlCommand comm = conn.CreateCommand();
 
-            comm.CommandText = "UPDATE SET Shelf_Product_Amount(`Amount`= `Amount` - @amount) WHERE (`Rack_Name`, `Shelf_Name`, `Product_BC`) Value (@rackName, @shelfName, @productBC);";
+            comm.CommandText = "UPDATE Shelf_Product_Amount SET `Amount` = `Amount` - @amount WHERE(`Product_BC` = @productBC) AND (`Rack_Name` = @rackName) AND (`Shelf_Name` = @shelfName);";
 
             comm.Parameters.AddWithValue("@rackName", rackName);
             comm.Parameters.AddWithValue("@shelfName", shelfName);
@@ -174,13 +212,12 @@ namespace StorageFacility.Service
             MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
 
             MySqlCommand comm = conn.CreateCommand();
-
-            comm.CommandText = "UPDATE SET Shelf_Product_Amount(`Amount`= `Amount` + @amount) WHERE (`Rack_Name`, `Shelf_Name`, `Product_BC`) Value (@rackName, @shelfName, @productBC);";
+            comm.CommandText = "UPDATE Shelf_Product_Amount SET `Amount` = `Amount` + @amount WHERE(`Product_BC` = @productBC) AND (`Rack_Name` = @rackName) AND (`Shelf_Name` = @shelfName);";
 
             comm.Parameters.AddWithValue("@rackName", rackName);
             comm.Parameters.AddWithValue("@shelfName", shelfName);
             comm.Parameters.AddWithValue("@productBC", barcode);
-            comm.Parameters.AddWithValue("@amount", amount);
+            comm.Parameters.AddWithValue("@amount", Convert.ToByte(amount));
 
             try
             {

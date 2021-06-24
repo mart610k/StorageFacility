@@ -1,0 +1,3 @@
+use StorageFacility;
+
+ALTER TABLE Shelf_Product_Amount MODIFY Amount TINYINT UNSIGNED NOT NULL

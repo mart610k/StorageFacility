@@ -10,6 +10,7 @@
         <Button Clicked="Show_Register_Product" Text="Create New Product" BackgroundColor="BurlyWood"></Button>
         <Button Clicked="Find_Product_Page" Text="Find Products On Shelves" BackgroundColor="HotPink"></Button>
         <Button Clicked="Show_AddToShelf" Text="Add Product to Shelf" BackgroundColor="LightPink"></Button>
+        <Button Clicked="Show_AddProductAmount" Text="Add Product Amount" BackgroundColor="Magenta"></Button>
     </StackLayout>
 
 </ContentPage>
