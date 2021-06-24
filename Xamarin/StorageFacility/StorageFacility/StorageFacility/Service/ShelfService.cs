@@ -118,5 +118,22 @@ namespace StorageFacility.Service
                 return null;
             }
         }
+
+        public async Task<bool> RemoveProductAmount(string rackName, string shelfName, string barcode, int amount)
+        {
+            HttpResponseMessage response = await client.PostAsync(
+                string.Format("{0}/api/Shelf/RemoveAmount?rackName={1}&shelfName={2}&barcode={3}&amount={4}", hostName, rackName, shelfName, barcode, amount), null);
+
+            response.EnsureSuccessStatusCode();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -48,6 +48,8 @@ namespace StorageFacility.Service
         /// <returns></returns>
         Task<bool> AddProductAmount(string rackName, string shelfName, string barcode, int amount);
 
+        Task<bool> RemoveProductAmount(string rackName, string shelfName, string barcode, int amount);
+
         Task<List<ShelfProductAmount>> GetProductAmount();
     }
 }

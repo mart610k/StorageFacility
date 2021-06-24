@@ -14,27 +14,43 @@ using Xamarin.Forms.Xaml;
 namespace StorageFacility.ContentPages
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddProductAmount : ContentPage
+    public partial class RemoveProductAmount : ContentPage
     {
         // Initiating Services
         IShelfService shelfService = new ShelfService();
 
         // Initiating Lists
         ObservableCollection<ShelfProductAmount> ShelfProducts = new ObservableCollection<ShelfProductAmount>();
-        public AddProductAmount()
+        public RemoveProductAmount()
         {
             InitializeComponent();
             GetData();
         }
-
-        
         protected override void OnAppearing()
         {
             dataPicker.ItemsSource = ShelfProducts;
             base.OnAppearing();
         }
 
-        private async void AddAmount(object sender, EventArgs e)
+        private async void GetData()
+        {
+            List<ShelfProductAmount> TempList = await shelfService.GetProductAmount();
+            foreach (ShelfProductAmount item in TempList)
+            {
+                ShelfProducts.Add(item);
+            }
+            dataPicker.SelectedIndex = 0;
+        }
+
+        private void dataPicker_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int maxRemove = ((ShelfProductAmount)dataPicker.SelectedItem).Amount;
+
+            AmountOfProducts.Text = "Current Amount: " + ((ShelfProductAmount)dataPicker.SelectedItem).Amount.ToString() + "\r\n"
+                + "Can remove " + maxRemove + " " + ((ShelfProductAmount)dataPicker.SelectedItem).Product.Name;
+        }
+
+        private async void RemoveAmount(object sender, EventArgs e)
         {
             string shelf = null;
             string rack = null;
@@ -72,41 +88,25 @@ namespace StorageFacility.ContentPages
                     await DisplayAlert("Format", "Input Number is too big", "OK");
                     return;
                 }
-            } else
+            }
+            else
             {
                 await DisplayAlert("Input", "Format Number is above 3 Signs or Format is not a Number", "OK");
                 return;
             }
 
             //TODO --MBA Ensure that on 400 an exception is not thrown, and the user is aware that the shelf already contains said product.
-            bool resultBool = await shelfService.AddProductAmount(rack, shelf, barcode, amount);
+            bool resultBool = await shelfService.RemoveProductAmount(rack, shelf, barcode, amount);
 
             if (resultBool)
             {
-                await DisplayAlert("Add Product", string.Format("{0} {1} have been added to Shelf {2}", amount, product, shelf), "OK");
+                await DisplayAlert("Remove Product", string.Format("{0} {1} have been removed from Shelf {2}", amount, product, shelf), "OK");
             }
             else
             {
-                await DisplayAlert("Add Product", "Product have not been added", "OK");
+                await DisplayAlert("Remove Product", "Product have not been removed", "OK");
             }
             await Navigation.PopToRootAsync();
-        }
-
-        private async void GetData()
-        {
-            List<ShelfProductAmount> TempList = await shelfService.GetProductAmount();
-            foreach (ShelfProductAmount item in TempList)
-            {
-                ShelfProducts.Add(item);
-            }
-            dataPicker.SelectedIndex = 0;
-        }
-
-        private void dataPicker_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int maxInsert = byte.MaxValue - ((ShelfProductAmount)dataPicker.SelectedItem).Amount;
-            AmountOfProducts.Text = "Current Amount: " + ((ShelfProductAmount)dataPicker.SelectedItem).Amount.ToString() + " (Maximum is: " + byte.MaxValue +")\r\n"
-                + "Can Add " + maxInsert + " " + ((ShelfProductAmount)dataPicker.SelectedItem).Product.Name;
         }
     }
 }

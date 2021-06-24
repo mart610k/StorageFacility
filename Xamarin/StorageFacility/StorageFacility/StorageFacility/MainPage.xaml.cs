@@ -75,5 +75,10 @@ namespace StorageFacility
         {
             await Navigation.PushAsync(new AddProductAmount());
         }
+        
+        private async void Show_RemoveProductAmount(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new RemoveProductAmount());
+        }
     }
 }
