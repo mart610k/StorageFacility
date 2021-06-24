@@ -96,15 +96,23 @@ namespace StorageFacility.ContentPages
             }
 
             //TODO --MBA Ensure that on 400 an exception is not thrown, and the user is aware that the shelf already contains said product.
-            bool resultBool = await shelfService.RemoveProductAmount(rack, shelf, barcode, amount);
+            try
+            {
+                bool resultBool = await shelfService.RemoveProductAmount(rack, shelf, barcode, amount);
 
-            if (resultBool)
-            {
-                await DisplayAlert("Remove Product", string.Format("{0} {1} have been removed from Shelf {2}", amount, product, shelf), "OK");
+                if (resultBool)
+                {
+                    await DisplayAlert("Remove Product", string.Format("{0} {1} have been removed from Shelf {2}", amount, product, shelf), "OK");
+                }
+                else
+                {
+                    await DisplayAlert("Remove Product", "Product have not been removed", "OK");
+                }
             }
-            else
+            catch (Exception error)
             {
-                await DisplayAlert("Remove Product", "Product have not been removed", "OK");
+                await DisplayAlert("Input", "Error calling API, " + error.Message, "OK");
+                return;
             }
             await Navigation.PopToRootAsync();
         }
