@@ -77,15 +77,23 @@ namespace StorageFacility
             }
 
             //TODO --MBA Ensure that on 400 an exception is not thrown, and the user is aware that the shelf already contains said product.
-            bool resultBool = await shelfService.AddProductToShelf(rack, shelf, barcode);
+            try
+            {
+                bool resultBool = await shelfService.AddProductToShelf(rack, shelf, barcode);
 
-            if (resultBool)
-            {
-                await DisplayAlert("Add Product", string.Format("Product {0} have been added to Shelf {1}", product, shelf), "OK");
+                if (resultBool)
+                {
+                    await DisplayAlert("Add Product", string.Format("Product {0} have been added to Shelf {1}", product, shelf), "OK");
+                }
+                else
+                {
+                    await DisplayAlert("Add Product", "Product have not been added", "OK");
+                }
             }
-            else
+            catch (Exception error)
             {
-                await DisplayAlert("Add Product", "Product have not been added", "OK");
+                await DisplayAlert("Input", "Error calling API, " + error.Message, "OK");
+                return;
             }
             await Navigation.PopToRootAsync();
         }
