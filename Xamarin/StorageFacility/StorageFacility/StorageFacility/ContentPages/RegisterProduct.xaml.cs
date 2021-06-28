@@ -64,9 +64,17 @@ namespace StorageFacility
 
             if (!hadValidationErrors)
             {
-                await productService.CreateProduct(NameEntry.Text, BarcodeField.Text);
-                await DisplayAlert("Successfull", string.Format("the product {0} was created with the barcode {1}", NameEntry.Text, BarcodeField.Text), "OK");
-                await Navigation.PopAsync();
+                try
+                {
+                    await productService.CreateProduct(NameEntry.Text, BarcodeField.Text);
+                    await DisplayAlert("Successfull", string.Format("the product {0} was created with the barcode {1}", NameEntry.Text, BarcodeField.Text), "OK");
+                    await Navigation.PopAsync();
+                }
+                catch (Exception error)
+                {
+                    await DisplayAlert("Input", "Error calling API, " + error.Message, "OK");
+                    return;
+                }
             }
         }
 
