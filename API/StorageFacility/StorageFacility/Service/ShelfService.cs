@@ -101,17 +101,6 @@ namespace StorageFacility.Service
             return shelfProductAmounts;
         }
 
-
-        /// <summary>
-        /// Adds a product to a shelf, based on the 3 parameters
-        /// The Rack
-        /// The Shelf 
-        /// The Product Barcode
-        /// </summary>
-        /// <param name="rackName"></param>
-        /// <param name="shelfName"></param>
-        /// <param name="barcode"></param>
-        /// <returns></returns>
         public bool AddProductToShelf(string rackName, string shelfName, string barcode)
         {
             MySqlConnection conn = new MySqlConnection(databaseConnection.GetConnectionString());
