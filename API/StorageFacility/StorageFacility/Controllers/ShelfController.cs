@@ -90,6 +90,15 @@ namespace StorageFacility.Controllers
             }
         }
 
+        /// <summary>
+        /// Adds an amount of products to a shelf based on inputs
+        /// with shelf logic method
+        /// </summary>
+        /// <param name="rackName"></param>
+        /// <param name="shelfName"></param>
+        /// <param name="barcode"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         [HttpPost("AddAmount")]
         public IActionResult AddProductAmount(string rackName, string shelfName, string barcode, int amount)
         {
@@ -104,6 +113,15 @@ namespace StorageFacility.Controllers
             }
         }
 
+        /// <summary>
+        /// Removes an amount of products to a shelf based on inputs
+        /// with shelf logic method
+        /// </summary>
+        /// <param name="rackName"></param>
+        /// <param name="shelfName"></param>
+        /// <param name="barcode"></param>
+        /// <param name="amount"></param>
+        /// <returns></returns>
         [HttpPost("RemoveAmount")]
         public IActionResult RemoveProductAmount(string rackName, string shelfName, string barcode, int amount)
         {
