@@ -10,6 +10,12 @@ namespace StorageFacility.Service
     /// </summary>
     public interface IAuthService
     {
+        /// <summary>
+        /// Bool on UserAllowed, supposed to check if user is allowed access
+        /// Not needed for Version 1, but Version 2
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns>boolean for if the user is auhtorized</returns>
         bool UserAllowed(string name);
 
     }

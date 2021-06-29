@@ -44,15 +44,6 @@ namespace StorageFacility.Logic
             this.authService = authService;
         }
 
-        /// <summary>
-        /// Registers a Product, based on the inputs
-        /// Uses Factory to get the necesarry services 
-        /// Uses ProductService to register the Shelf
-        /// Uses BarcodeVerifier to verify if it's valid
-        /// </summary>
-        /// <param name="username"></param>
-        /// <param name="barcode"></param>
-        /// <param name="name"></param>
         public void RegisterProduct(string username, string barcode, string name)
         {
             try
@@ -77,10 +68,6 @@ namespace StorageFacility.Logic
 
         }
 
-        /// <summary>
-        /// Gets a list of products
-        /// </summary>
-        /// <returns></returns>
         public List<Product> GetProducts()
         {
             if (authService.UserAllowed(""))

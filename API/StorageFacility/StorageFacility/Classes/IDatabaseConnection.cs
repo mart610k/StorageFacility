@@ -10,6 +10,10 @@ namespace StorageFacility.Classes
     /// </summary>
     public interface IDatabaseConnection
     {
+        /// <summary>
+        /// Gets the connection string 
+        /// </summary>
+        /// <returns>string formatted to create a connection</returns>
         string GetConnectionString();
     }
 }
